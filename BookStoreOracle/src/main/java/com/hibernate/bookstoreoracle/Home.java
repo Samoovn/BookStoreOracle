@@ -21,15 +21,15 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jOptionPane1 = new javax.swing.JOptionPane();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-
-        jMenuItem1.setText("jMenuItem1");
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,12 +44,29 @@ public class Home extends javax.swing.JFrame {
             .addGap(0, 525, Short.MAX_VALUE)
         );
 
-        jMenu4.setText("Tìm sách");
+        jMenu4.setText("Sách");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenu4MouseClicked(evt);
             }
         });
+
+        jMenuItem1.setText("Tìm sách");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+
+        jMenuItem2.setText("Tạo hóa đơn");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
         jMenuBar1.add(jMenu4);
 
         jMenu3.setText("Tìm KH");
@@ -68,6 +85,9 @@ public class Home extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu5);
 
+        jMenu1.setText("Tìm Cửa Hàng");
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,18 +103,9 @@ public class Home extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    FindBook findB;
+    
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         // TODO add your handling code here:
-         if(findB == null || findB.isClosed()==true)
-        {
-            findB = new FindBook();
-            jDesktopPane1.add(findB);
-            findB.setVisible(true);
-        }else
-        {
-            findB.setVisible(true);
-        }
     }//GEN-LAST:event_jMenu4MouseClicked
     FindCustomer findcus;
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
@@ -122,7 +133,33 @@ public class Home extends javax.swing.JFrame {
             findor.setVisible(true);
         }
     }//GEN-LAST:event_jMenu5MouseClicked
-    
+    FindBook findB;
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        if(findB == null || findB.isClosed()==true)
+        {
+            findB = new FindBook("tim");
+            jDesktopPane1.add(findB);
+            findB.setVisible(true);
+        }else
+        {
+            findB.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    FindBook MakeB; 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        if(MakeB == null || MakeB.isClosed()==true)
+        {
+            MakeB = new FindBook("tao");
+            jDesktopPane1.add(MakeB);
+            MakeB.setVisible(true);
+        }else
+        {
+            MakeB.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+               
     /**
      * @param args the command line arguments
      */
@@ -160,11 +197,13 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }

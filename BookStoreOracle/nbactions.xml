@@ -15,7 +15,7 @@
                 <exec.appArgs></exec.appArgs>
                 <exec.mainClass>com.hibernate.bookstoreoracle.Home</exec.mainClass>
                 <exec.executable>java</exec.executable>
-                <exec.workingdir>D:\OneDrive - MSFT\DA CHUYENNGANH\SourceCode\BookStoreOracle\src\main\java\com\hibernate\bookstoreoracle</exec.workingdir>
+                <exec.workingdir>D:\OneDrive - MSFT\DA CHUYENNGANH\SourceCode\BookStoreOracle</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -34,7 +34,7 @@
                 <exec.mainClass>com.hibernate.bookstoreoracle.Home</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
-                <exec.workingdir>D:\OneDrive - MSFT\DA CHUYENNGANH\SourceCode\BookStoreOracle\src\main\java\com\hibernate\bookstoreoracle</exec.workingdir>
+                <exec.workingdir>D:\OneDrive - MSFT\DA CHUYENNGANH\SourceCode\BookStoreOracle</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -52,7 +52,7 @@
                 <exec.mainClass>com.hibernate.bookstoreoracle.Home</exec.mainClass>
                 <exec.executable>java</exec.executable>
                 <exec.appArgs></exec.appArgs>
-                <exec.workingdir>D:\OneDrive - MSFT\DA CHUYENNGANH\SourceCode\BookStoreOracle\src\main\java\com\hibernate\bookstoreoracle</exec.workingdir>
+                <exec.workingdir>D:\OneDrive - MSFT\DA CHUYENNGANH\SourceCode\BookStoreOracle</exec.workingdir>
             </properties>
         </action>
     </actions>
