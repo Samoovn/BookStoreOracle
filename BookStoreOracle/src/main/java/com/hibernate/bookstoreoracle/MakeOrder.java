@@ -12,12 +12,12 @@ import javax.swing.JPanel;
  *
  * @author DELL
  */
-public class FindBook extends javax.swing.JInternalFrame {
+public class MakeOrder extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FindBook2
+     * Creates new form MakeOrder
      */
-    public FindBook() {
+    public MakeOrder() {
         initComponents();
         Color col = new Color(250, 242, 211);
         getContentPane().setBackground(col);
@@ -32,7 +32,6 @@ public class FindBook extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLayeredPane10 = new javax.swing.JLayeredPane();
         panel12 = new java.awt.Panel();
         jLabel45 = new javax.swing.JLabel();
@@ -40,7 +39,7 @@ public class FindBook extends javax.swing.JInternalFrame {
         jTable13 = new javax.swing.JTable();
         btn_tim1 = new javax.swing.JButton();
         jLayeredPane11 = new javax.swing.JLayeredPane();
-        btn_capnhat = new javax.swing.JButton();
+        btn_ok = new javax.swing.JButton();
         txt_soluong10 = new javax.swing.JTextField();
         jLabel42 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
@@ -48,11 +47,13 @@ public class FindBook extends javax.swing.JInternalFrame {
         txt_tensach10 = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
+        btn_themgiohang = new javax.swing.JButton();
+        pn_giohang = new java.awt.Panel();
+        jLabel50 = new javax.swing.JLabel();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        tbl_giohang = new javax.swing.JTable();
         btn_Scan1 = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
-
-        setBorder(null);
         setClosable(true);
         setIconifiable(true);
 
@@ -102,8 +103,8 @@ public class FindBook extends javax.swing.JInternalFrame {
             jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_tim1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_tim1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
@@ -116,15 +117,14 @@ public class FindBook extends javax.swing.JInternalFrame {
                 .addComponent(panel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_tim1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(22, 22, 22))
         );
 
-        btn_capnhat.setText("Cập nhật");
-        btn_capnhat.setToolTipText("");
+        btn_ok.setText("OK");
 
         jLabel42.setText("Số lượng");
 
@@ -133,20 +133,56 @@ public class FindBook extends javax.swing.JInternalFrame {
         jLabel43.setText("Tên sách");
 
         panel1.setBackground(new java.awt.Color(34, 9, 44));
-        panel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 8, Short.MAX_VALUE)
+            .addGap(0, 340, Short.MAX_VALUE)
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 8, Short.MAX_VALUE)
         );
 
-        jLayeredPane11.setLayer(btn_capnhat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        btn_themgiohang.setText("Thêm vào giỏ hàng");
+        btn_themgiohang.setToolTipText("");
+
+        pn_giohang.setBackground(new java.awt.Color(204, 236, 248));
+
+        jLabel50.setText("GIỎ HÀNG");
+
+        javax.swing.GroupLayout pn_giohangLayout = new javax.swing.GroupLayout(pn_giohang);
+        pn_giohang.setLayout(pn_giohangLayout);
+        pn_giohangLayout.setHorizontalGroup(
+            pn_giohangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_giohangLayout.createSequentialGroup()
+                .addContainerGap(174, Short.MAX_VALUE)
+                .addComponent(jLabel50)
+                .addGap(155, 155, 155))
+        );
+        pn_giohangLayout.setVerticalGroup(
+            pn_giohangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_giohangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tbl_giohang.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane12.setViewportView(tbl_giohang);
+
+        jLayeredPane11.setLayer(btn_ok, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(txt_soluong10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel42, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel44, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -154,49 +190,68 @@ public class FindBook extends javax.swing.JInternalFrame {
         jLayeredPane11.setLayer(txt_tensach10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel43, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(panel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(btn_themgiohang, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(pn_giohang, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(jScrollPane12, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane11Layout = new javax.swing.GroupLayout(jLayeredPane11);
         jLayeredPane11.setLayout(jLayeredPane11Layout);
         jLayeredPane11Layout.setHorizontalGroup(
             jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane11Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel44)
-                    .addComponent(jLabel43)
-                    .addComponent(txt_tensach10, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                    .addComponent(txt_giasach10))
-                .addGap(27, 27, 27)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_capnhat, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                    .addComponent(jLabel42)
-                    .addComponent(txt_soluong10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel44)
+                            .addComponent(txt_tensach10, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(txt_giasach10)))
+                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_themgiohang, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                                .addComponent(jLabel42)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_soluong10, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(btn_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pn_giohang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jLayeredPane11Layout.setVerticalGroup(
-            jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jLayeredPane11Layout.createSequentialGroup()
                 .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane11Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
                         .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_tensach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel44)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_giasach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel42)
-                        .addGap(13, 13, 13)
-                        .addComponent(txt_soluong10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_giasach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_soluong10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel42))
                         .addGap(18, 18, 18)
-                        .addComponent(btn_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_themgiohang, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(btn_ok))
+                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                        .addComponent(pn_giohang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         btn_Scan1.setText("QR Scan");
@@ -211,29 +266,28 @@ public class FindBook extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_Scan1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btn_Scan1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(btn_Scan1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -258,8 +312,8 @@ public class FindBook extends javax.swing.JInternalFrame {
         Scanscreen.add(btn_timSach);
         this.add(btn_timSach);
         this.add(Scanscreen);
-        jLayeredPane11.setBounds(10, 350, jLayeredPane11.getWidth(), jLayeredPane11.getHeight());
-        this.add(jLayeredPane11);
+//        jLayeredPane11.setBounds(10, 350, jLayeredPane11.getWidth(), jLayeredPane11.getHeight());
+//        this.add(jLayeredPane11);
     }
     private void btn_TimSachClicked(java.awt.event.MouseEvent evt) {
         
@@ -275,19 +329,23 @@ public class FindBook extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Scan1;
-    private javax.swing.JButton btn_capnhat;
+    private javax.swing.JButton btn_ok;
+    private javax.swing.JButton btn_themgiohang;
     private javax.swing.JButton btn_tim1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLayeredPane jLayeredPane10;
     private javax.swing.JLayeredPane jLayeredPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JTable jTable13;
     private java.awt.Panel panel1;
     private java.awt.Panel panel12;
+    private java.awt.Panel pn_giohang;
+    private javax.swing.JTable tbl_giohang;
     private javax.swing.JTextField txt_giasach10;
     private javax.swing.JTextField txt_soluong10;
     private javax.swing.JTextField txt_tensach10;
