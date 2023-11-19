@@ -47,7 +47,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btn_Scan1" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Component id="jLayeredPane10" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLayeredPane11" min="-2" max="-2" attributes="0"/>
@@ -167,7 +167,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel43" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel44" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txt_tensach10" alignment="0" pref="297" max="32767" attributes="0"/>
+                              <Component id="txt_tensach" alignment="0" pref="297" max="32767" attributes="0"/>
                               <Component id="txt_giasach10" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -204,7 +204,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txt_tensach10" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_tensach" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -220,14 +220,15 @@
                           <Component id="btn_themgiohang" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="btn_ok" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="pn_giohang" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jScrollPane12" min="-2" pref="233" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane12" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -252,7 +253,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_giasach10">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_tensach10">
+        <Component class="javax.swing.JTextField" name="txt_tensach">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel43">
           <Properties>

@@ -4,7 +4,24 @@
  */
 package com.hibernate.bookstoreoracle;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -12,7 +29,7 @@ import javax.swing.JPanel;
  *
  * @author DELL
  */
-public class MakeOrder extends javax.swing.JInternalFrame {
+public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,ThreadFactory{
 
     /**
      * Creates new form MakeOrder
@@ -44,7 +61,7 @@ public class MakeOrder extends javax.swing.JInternalFrame {
         jLabel42 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
         txt_giasach10 = new javax.swing.JTextField();
-        txt_tensach10 = new javax.swing.JTextField();
+        txt_tensach = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
         btn_themgiohang = new javax.swing.JButton();
@@ -187,7 +204,7 @@ public class MakeOrder extends javax.swing.JInternalFrame {
         jLayeredPane11.setLayer(jLabel42, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel44, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(txt_giasach10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane11.setLayer(txt_tensach10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(txt_tensach, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel43, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(panel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(btn_themgiohang, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -205,7 +222,7 @@ public class MakeOrder extends javax.swing.JInternalFrame {
                         .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel43)
                             .addComponent(jLabel44)
-                            .addComponent(txt_tensach10, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(txt_tensach, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                             .addComponent(txt_giasach10)))
                     .addGroup(jLayeredPane11Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
@@ -232,7 +249,7 @@ public class MakeOrder extends javax.swing.JInternalFrame {
                     .addGroup(jLayeredPane11Layout.createSequentialGroup()
                         .addComponent(jLabel43)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_tensach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_tensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel44)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,11 +263,12 @@ public class MakeOrder extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btn_themgiohang, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
-                        .addComponent(btn_ok))
+                        .addComponent(btn_ok)
+                        .addGap(0, 34, Short.MAX_VALUE))
                     .addGroup(jLayeredPane11Layout.createSequentialGroup()
                         .addComponent(pn_giohang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -283,7 +301,7 @@ public class MakeOrder extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_Scan1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,6 +312,9 @@ public class MakeOrder extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     private JPanel Scanscreen;
     private JButton btn_timSach;
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
     private void SetLayoutScan()
     {
         jLayeredPane10.setVisible(false);
@@ -307,13 +328,14 @@ public class MakeOrder extends javax.swing.JInternalFrame {
             }
         });
         Scanscreen = new JPanel();
-        Scanscreen.setBounds(0, 45, 550, 290);
+        Scanscreen.setBounds(200, 45, 350, 250);
         Scanscreen.setBackground(Color.black);
         Scanscreen.add(btn_timSach);
         this.add(btn_timSach);
         this.add(Scanscreen);
 //        jLayeredPane11.setBounds(10, 350, jLayeredPane11.getWidth(), jLayeredPane11.getHeight());
 //        this.add(jLayeredPane11);
+        initWebcam();
     }
     private void btn_TimSachClicked(java.awt.event.MouseEvent evt) {
         
@@ -325,7 +347,55 @@ public class MakeOrder extends javax.swing.JInternalFrame {
     private void btn_Scan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Scan1MouseClicked
         SetLayoutScan();
     }//GEN-LAST:event_btn_Scan1MouseClicked
-
+    private void initWebcam()
+    {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        Scanscreen.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,470, 300));
+        executor.execute(this);
+    }
+    @Override
+    public void run(){
+        do{
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FindBook.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Result result = null;
+            BufferedImage image = null;
+            if(webcam.isOpen())
+            {
+                if((image = webcam.getImage())==null)
+                {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            
+            try {
+                result = new MultiFormatReader().decode(bitmap);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(FindBook.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(result != null)
+            {
+                txt_tensach.setText(result.getText());
+            }
+        }while(true);
+    }
+    @Override
+    public Thread newThread(Runnable r)
+    {
+        Thread t = new Thread(r,"My Thread");
+        t.setDaemon(true);
+        return t;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Scan1;
@@ -348,6 +418,6 @@ public class MakeOrder extends javax.swing.JInternalFrame {
     private javax.swing.JTable tbl_giohang;
     private javax.swing.JTextField txt_giasach10;
     private javax.swing.JTextField txt_soluong10;
-    private javax.swing.JTextField txt_tensach10;
+    private javax.swing.JTextField txt_tensach;
     // End of variables declaration//GEN-END:variables
 }

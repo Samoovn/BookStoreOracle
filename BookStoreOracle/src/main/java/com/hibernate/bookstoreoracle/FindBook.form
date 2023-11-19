@@ -44,7 +44,7 @@
                       <Component id="jLayeredPane11" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -176,7 +176,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
-                      <Component id="txt_tensach10" pref="364" max="32767" attributes="0"/>
+                      <Component id="txt_tensach" pref="364" max="32767" attributes="0"/>
                       <Component id="txt_giasach10" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -199,7 +199,7 @@
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txt_tensach10" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_tensach" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -241,7 +241,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_giasach10">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_tensach10">
+        <Component class="javax.swing.JTextField" name="txt_tensach">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel43">
           <Properties>
