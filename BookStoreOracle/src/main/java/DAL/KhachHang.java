@@ -9,16 +9,16 @@ package DAL;
  * @author DELL
  */
 public class KhachHang {
-    public int makh;
+    public String makh;
     public String tenkh;
     public String SDT;
     public String diachi;
 
-    public int getMakh() {
+    public String getMakh() {
         return makh;
     }
 
-    public void setMakh(int makh) {
+    public void setMakh(String makh) {
         this.makh = makh;
     }
 
