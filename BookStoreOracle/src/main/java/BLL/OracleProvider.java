@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 
 public class OracleProvider {
     private static Connection connect=null;
-    private static String username;
-    private static String password;
-    private static String url="jdbc:oracle:thin:@localhost:1521:cuahangsach";
+    private static String username = "system";
+    private static String password = "system123";
+    private static String url="jdbc:oracle:thin:@localhost:1521:CUAHANGSACH1";
     public OracleProvider(){
         
     }
@@ -34,7 +34,7 @@ public class OracleProvider {
     public static Connection getConnection(){    
         if (connect==null){
            try{                        
-            if(username.equals("SYS")){
+            if(username!=null && username.equals("SYS")){
                 connect = DriverManager.getConnection(url, 
                     username.toUpperCase() + " as sysdba", password);
             }
@@ -42,7 +42,9 @@ public class OracleProvider {
                 connect = DriverManager.getConnection(url, 
                     username.toUpperCase(), password);
             }
-            }catch(Exception e){} 
+            }catch(Exception e){
+             System.out.print(e);
+            } 
         }        
     return connect;
     }

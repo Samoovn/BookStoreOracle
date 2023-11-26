@@ -2,6 +2,8 @@
 package BLL;
 
 import DAL.KhachHang;
+import com.beust.jcommander.internal.Console;
+import com.sun.jdi.connect.spi.Connection;
 import java.sql.CallableStatement;
 import java.util.ArrayList;
 import oracle.jdbc.OracleTypes;
@@ -36,7 +38,8 @@ public class KhachHangDAO {
             cs.close();
             
         }
-        catch(Exception e){            
+        catch(Exception e){ 
+             System.out.print(e);
         }
         return dsKH;
     }
