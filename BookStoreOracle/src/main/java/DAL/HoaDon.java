@@ -12,19 +12,19 @@ import java.util.Date;
  */
 public class HoaDon {
 
-    public int getMahd() {
+    public String getMahd() {
         return mahd;
     }
 
-    public void setMahd(int mahd) {
+    public void setMahd(String mahd) {
         this.mahd = mahd;
     }
 
-    public Date getNgaylap() {
+    public String getNgaylap() {
         return ngaylap;
     }
 
-    public void setNgaylap(Date ngaylap) {
+    public void setNgaylap(String ngaylap) {
         this.ngaylap = ngaylap;
     }
 
@@ -36,24 +36,24 @@ public class HoaDon {
         this.tongtien = tongtien;
     }
 
-    public int getMacuahang() {
+    public String getMacuahang() {
         return macuahang;
     }
 
-    public void setMacuahang(int macuahang) {
+    public void setMacuahang(String macuahang) {
         this.macuahang = macuahang;
     }
 
-    public int getMakh() {
+    public String getMakh() {
         return makh;
     }
 
-    public void setMakh(int makh) {
+    public void setMakh(String makh) {
         this.makh = makh;
     }
-    public int mahd;
-    public Date ngaylap;
+    public String mahd;
+    public String ngaylap;
     public int tongtien;
-    public int macuahang;
-    public int makh;
+    public String macuahang;
+    public String makh;
 }

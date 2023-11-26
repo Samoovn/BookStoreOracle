@@ -10,11 +10,11 @@ package DAL;
  */
 public class Sach {
 
-    public int getMasach() {
+    public String getMasach() {
         return masach;
     }
 
-    public void setMasach(int masach) {
+    public void setMasach(String masach) {
         this.masach = masach;
     }
 
@@ -41,9 +41,17 @@ public class Sach {
     public void setQr(String qr) {
         this.qr = qr;
     }
-    public int masach;
+    public String masach;
     public String tensach;
     public int gia;
     public String qr;
-    
+
+    public int getSl() {
+        return sl;
+    }
+
+    public void setSl(int sl) {
+        this.sl = sl;
+    }
+    public int sl;
 }

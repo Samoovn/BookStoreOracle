@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package com.hibernate.bookstoreoracle;
-
+import BLL.HoaDonDAO;
+import DAL.HoaDon;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author DELL
@@ -13,10 +16,26 @@ public class FindOrder extends javax.swing.JInternalFrame {
     /**
      * Creates new form FindOrder
      */
+     HoaDonDAO hd = new HoaDonDAO();
     public FindOrder() {
         initComponents();
+        load();
     }
-
+    private void load()
+    {
+        ArrayList<HoaDon> dsHD = hd.hienThongTinHoaDon();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã Hóa Đơn");
+        model.addColumn("Mã Khách Hàng");
+        model.addColumn("Ngày Lập");
+        model.addColumn("Tổng Tiền");
+        model.addColumn("Mã Cửa Hàng");
+         for (HoaDon kh : dsHD) {
+            Object[] rowData = {kh.getMahd(), kh.getMakh(), kh.getNgaylap(), kh.getTongtien(), kh.getMacuahang()};
+            model.addRow(rowData);
+        }
+        dgv_DSHoaDon.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +51,9 @@ public class FindOrder extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_TongTien = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        txt_makh = new javax.swing.JLabel();
         btn_TimHoaDon = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        txt_mahd = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txt_TongTien2 = new javax.swing.JTextField();
@@ -44,9 +63,9 @@ public class FindOrder extends javax.swing.JInternalFrame {
         txt_TongTien4 = new javax.swing.JTextField();
         btn_TimHoaDon2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        dgv_DSHoaDon1 = new javax.swing.JTable();
-        jScrollPane1 = new javax.swing.JScrollPane();
         dgv_DSHoaDon = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        dgv_DSSP = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -67,14 +86,19 @@ public class FindOrder extends javax.swing.JInternalFrame {
 
         txt_TongTien.setName("txt_NgayLap"); // NOI18N
 
-        jLabel5.setText("Mã khách hàng:");
+        txt_makh.setText("Mã khách hàng:");
 
         btn_TimHoaDon.setText("Tìm kiếm");
-
-        jTextField2.setName("txt_NgayLap"); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        btn_TimHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                btn_TimHoaDonActionPerformed(evt);
+            }
+        });
+
+        txt_mahd.setName("txt_NgayLap"); // NOI18N
+        txt_mahd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_mahdActionPerformed(evt);
             }
         });
 
@@ -111,9 +135,9 @@ public class FindOrder extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txt_mahd, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
+                                        .addComponent(txt_makh)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(38, 38, 38)
@@ -153,12 +177,12 @@ public class FindOrder extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_mahd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(txt_makh))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -186,19 +210,6 @@ public class FindOrder extends javax.swing.JInternalFrame {
                 .addGap(13, 13, 13))
         );
 
-        dgv_DSHoaDon1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(dgv_DSHoaDon1);
-
         dgv_DSHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -210,7 +221,20 @@ public class FindOrder extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(dgv_DSHoaDon);
+        jScrollPane2.setViewportView(dgv_DSHoaDon);
+
+        dgv_DSSP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(dgv_DSSP);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setText("DANH SÁCH SẢN PHẨM");
@@ -225,18 +249,17 @@ public class FindOrder extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jScrollPane1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 25, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addGap(121, 121, 121)))
+                        .addGap(0, 25, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(121, 121, 121)))))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
@@ -265,9 +288,25 @@ public class FindOrder extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txt_mahdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mahdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txt_mahdActionPerformed
+
+    private void btn_TimHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimHoaDonActionPerformed
+        // TODO add your handling code here:
+        ArrayList<HoaDon> dsHD = hd.timThongTinHoaDon(txt_mahd.getText(), txt_makh.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã Hóa Đơn");
+        model.addColumn("Mã Khách Hàng");
+        model.addColumn("Ngày Lập");
+        model.addColumn("Tổng Tiền");
+        model.addColumn("Mã Cửa Hàng");
+         for (HoaDon kh : dsHD) {
+            Object[] rowData = {kh.getMahd(), kh.getMakh(), kh.getNgaylap(), kh.getTongtien(), kh.getMacuahang()};
+            model.addRow(rowData);
+        }
+        dgv_DSHoaDon.setModel(model);
+    }//GEN-LAST:event_btn_TimHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,13 +314,12 @@ public class FindOrder extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_TimHoaDon1;
     private javax.swing.JButton btn_TimHoaDon2;
     private javax.swing.JTable dgv_DSHoaDon;
-    private javax.swing.JTable dgv_DSHoaDon1;
+    private javax.swing.JTable dgv_DSSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -289,10 +327,11 @@ public class FindOrder extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField txt_TongTien;
     private javax.swing.JTextField txt_TongTien2;
     private javax.swing.JTextField txt_TongTien3;
     private javax.swing.JTextField txt_TongTien4;
+    private javax.swing.JTextField txt_mahd;
+    private javax.swing.JLabel txt_makh;
     // End of variables declaration//GEN-END:variables
 }

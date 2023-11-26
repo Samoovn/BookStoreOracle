@@ -13,8 +13,7 @@ import java.sql.ResultSet;
 
 
 public class KhachHangDAO {
-    
-    public static ArrayList<KhachHang> xuatThongTinKhachHang(String makh, String tenkh){
+    public static ArrayList<KhachHang> xuatThongTinKhachHang(){
         ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
         OracleProvider op = new OracleProvider();
         String sql= "{CALL SYSTEM.P_HIEN_DSKH(?)}";
