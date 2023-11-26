@@ -19,8 +19,22 @@ public class FindCustomer extends javax.swing.JInternalFrame {
     KhachHangDAO kh = new KhachHangDAO();
     public FindCustomer() {
         initComponents();
+        load();
     }
-
+    private void load()
+    {
+        ArrayList<KhachHang> dsKH = kh.xuatThongTinKhachHang(txt_MaKH.getText(), txt_TenKH.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã KH");
+        model.addColumn("Tên KH");
+        model.addColumn("Số Điện Thoại");
+        model.addColumn("Địa Chỉ");
+         for (KhachHang kh : dsKH) {
+            Object[] rowData = {kh.getMakh(), kh.getTenkh(), kh.getSDT(), kh.getDiachi()};
+            model.addRow(rowData);
+        }
+        dgv_DSKH.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -199,7 +213,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
     private void txt_SDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_SDTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_SDTActionPerformed
-
+    
     private void btn_TimKiemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemKHActionPerformed
         // TODO add your handling code here:
         ArrayList<KhachHang> dsKH = kh.timThongTinKhachHang(txt_MaKH.getText(), txt_TenKH.getText());
