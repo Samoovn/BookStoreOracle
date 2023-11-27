@@ -37,6 +37,7 @@ public class Home extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -57,7 +58,7 @@ public class Home extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_setImage, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+            .addComponent(lb_setImage, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
         );
 
         jMenu4.setText("Sách");
@@ -111,6 +112,15 @@ public class Home extends javax.swing.JFrame {
 
         jMenu7.setText("QLHD");
         jMenuBar1.add(jMenu7);
+
+        jMenu2.setText("Đăng xuất");
+        jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -207,6 +217,13 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         resizeImg();
     }//GEN-LAST:event_formComponentResized
+    Login login; 
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        login = new Login(null,null);
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu2MouseClicked
                
     /**
      * @param args the command line arguments
@@ -246,6 +263,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
