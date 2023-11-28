@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     public Login(String url, String name) {
         initComponents();
         cb_tencuahang.addItem("CUAHANGSACH3");
+        cb_tencuahang.addItem("CUAHANGSACH2"); 
         cb_tencuahang.addItem("CUAHANGSACH1"); 
         cb_tencuahang.getItemAt(0);
         boolean ktname = false;
@@ -179,6 +180,13 @@ public class Login extends javax.swing.JFrame {
             op.setPort("1521");
             op.setService("CUAHANGSACH1");
             op.setUrl("jdbc:oracle:thin:@112.197.63.187:1521:CUAHANGSACH1");
+        }
+        else if(cb_tencuahang.getSelectedItem() == null || cb_tencuahang.getSelectedItem().equals("CUAHANGSACH2"))
+        {
+            op.setIp("171.235.167.112");
+            op.setPort("1521");
+            op.setService("CUAHANGSACH2");
+            op.setUrl("jdbc:oracle:thin:@171.235.167.112:1521:CUAHANGSACH2");
         }
         else if(cb_tencuahang.getSelectedItem().equals("CUAHANGSACH3"))
         {
