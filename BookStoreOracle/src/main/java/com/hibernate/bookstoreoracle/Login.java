@@ -18,12 +18,14 @@ public class Login extends javax.swing.JFrame {
      */
     private static OracleProvider op = new OracleProvider();
     private static Connection connect=null;
-    public Login(String url, String name) {
+    private static String mach = null;
+    public Login(String url, String name, String machnew) {
         initComponents();
-        cb_tencuahang.addItem("CUAHANGSACH3");
         cb_tencuahang.addItem("CUAHANGSACH2"); 
+//        cb_tencuahang.addItem("CUAHANGSACH3"); 
         cb_tencuahang.addItem("CUAHANGSACH1"); 
         cb_tencuahang.getItemAt(0);
+        this.mach = "CH02";
         boolean ktname = false;
         for (int i = 0; i < cb_tencuahang.getItemCount(); i++) {
             if (name != null && name.equals(cb_tencuahang.getItemAt(i))) {
@@ -33,8 +35,12 @@ public class Login extends javax.swing.JFrame {
         }
         if(!ktname && url!=null)
         {
-            
+            this.mach = machnew;
             cb_tencuahang.addItem(name);
+            // Lấy item tại vị trí mới thêm vào
+            int lastIndex = cb_tencuahang.getItemCount()- 1;
+            cb_tencuahang.setSelectedIndex(lastIndex);
+            cb_tencuahang.enable(false);
             op.setUrl(url);
         }
     }
@@ -156,7 +162,7 @@ public class Login extends javax.swing.JFrame {
         connect=op.getConnection();
         if(connect!=null){
             JOptionPane.showMessageDialog(null,"Kết nối thành công!");
-            Home hm = new Home();
+            Home hm = new Home(mach);
             this.dispose();      
             hm.show();
         }
@@ -180,6 +186,7 @@ public class Login extends javax.swing.JFrame {
             op.setPort("1521");
             op.setService("CUAHANGSACH1");
             op.setUrl("jdbc:oracle:thin:@112.197.63.187:1521:CUAHANGSACH1");
+            mach = "CH01";
         }
         else if(cb_tencuahang.getSelectedItem() == null || cb_tencuahang.getSelectedItem().equals("CUAHANGSACH2"))
         {
@@ -187,14 +194,16 @@ public class Login extends javax.swing.JFrame {
             op.setPort("1521");
             op.setService("CUAHANGSACH2");
             op.setUrl("jdbc:oracle:thin:@171.235.167.112:1521:CUAHANGSACH2");
+             mach = "CH02";
         }
-        else if(cb_tencuahang.getSelectedItem().equals("CUAHANGSACH3"))
-        {
-            op.setIp("112.197.63.187");
-            op.setPort("1522");
-            op.setService("CUAHANGSACH3");
-            op.setUrl("jdbc:oracle:thin:@112.197.63.187:1522:CUAHANGSACH3");
-        }
+//        else if(cb_tencuahang.getSelectedItem().equals("CUAHANGSACH3"))
+//        {
+//            op.setIp("112.197.63.187");
+//            op.setPort("1522");
+//            op.setService("CUAHANGSACH3");
+//            op.setUrl("jdbc:oracle:thin:@112.197.63.187:1522:CUAHANGSACH3");
+//             mach = "CH03";
+//        }
     }//GEN-LAST:event_cb_tencuahangItemStateChanged
 
     /**
@@ -227,7 +236,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login(null,null).setVisible(true);
+                new Login(null,null,null).setVisible(true);
             }
         });
     }

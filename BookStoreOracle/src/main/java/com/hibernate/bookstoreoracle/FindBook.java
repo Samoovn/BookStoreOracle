@@ -25,10 +25,14 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import BLL.SachDAO;
+import BLL.CTCHDAO;
 import DAL.Sach;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author DELL
@@ -38,13 +42,16 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
     /**
      * Creates new form FindBook2
      */
-    public FindBook() {
+    String mach;
+    public FindBook(String mach) {
         initComponents();
         Color col = new Color(250, 242, 211);
         getContentPane().setBackground(col);
         load();
+        this.mach = mach;
     }
     SachDAO sach = new SachDAO();
+    CTCHDAO ctch = new CTCHDAO();
     private void load()
     {
         ArrayList<Sach> dsKH = sach.xuatThongTinSach();
@@ -84,6 +91,8 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
         txt_tensach = new javax.swing.JTextField();
         jLabel43 = new javax.swing.JLabel();
         panel1 = new java.awt.Panel();
+        jLabel46 = new javax.swing.JLabel();
+        txt_masach = new javax.swing.JTextField();
         btn_Scan1 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
@@ -124,6 +133,11 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        dgv_DSSACH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dgv_DSSACHMouseClicked(evt);
+            }
+        });
         jScrollPane13.setViewportView(dgv_DSSACH);
 
         btn_tim1.setText("Tìm");
@@ -166,6 +180,11 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
 
         btn_capnhat.setText("Cập nhật");
         btn_capnhat.setToolTipText("");
+        btn_capnhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_capnhatActionPerformed(evt);
+            }
+        });
 
         jLabel42.setText("Số lượng");
 
@@ -187,6 +206,8 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jLabel46.setText("Mã sách");
+
         jLayeredPane11.setLayer(btn_capnhat, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(txt_soluong10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel42, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -195,18 +216,27 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
         jLayeredPane11.setLayer(txt_tensach, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(jLabel43, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane11.setLayer(panel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(jLabel46, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane11.setLayer(txt_masach, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane11Layout = new javax.swing.GroupLayout(jLayeredPane11);
         jLayeredPane11.setLayout(jLayeredPane11Layout);
         jLayeredPane11Layout.setHorizontalGroup(
             jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane11Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
                 .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel44)
-                    .addComponent(jLabel43)
-                    .addComponent(txt_tensach, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                    .addComponent(txt_giasach10))
+                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel43))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_tensach, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                            .addComponent(txt_giasach10)))
+                    .addGroup(jLayeredPane11Layout.createSequentialGroup()
+                        .addComponent(jLabel46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_masach)))
                 .addGap(27, 27, 27)
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -221,14 +251,18 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             .addGroup(jLayeredPane11Layout.createSequentialGroup()
                 .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane11Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_tensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel44)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_giasach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_masach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel46))
+                        .addGap(24, 24, 24)
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_tensach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel43))
+                        .addGap(25, 25, 25)
+                        .addGroup(jLayeredPane11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_giasach10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel44)))
                     .addGroup(jLayeredPane11Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel42)
@@ -333,6 +367,35 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
         }
         dgv_DSSACH.setModel(model);
     }//GEN-LAST:event_btn_tim1ActionPerformed
+
+    private void dgv_DSSACHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dgv_DSSACHMouseClicked
+        // TODO add your handling code here:
+        int row = dgv_DSSACH.rowAtPoint(evt.getPoint());
+
+        // Ensure that the click is within the bounds of the table
+        if (row >= 0 ) {
+            Object ma = dgv_DSSACH.getValueAt(row, 0);
+            txt_masach.setText(ma.toString());
+            Object ten = dgv_DSSACH.getValueAt(row, 1);
+            txt_tensach.setText(ten.toString().trim());
+            Object gia = dgv_DSSACH.getValueAt(row, 2);
+            txt_giasach10.setText(gia.toString());
+            Object sl = dgv_DSSACH.getValueAt(row, 3);
+            txt_soluong10.setText(sl.toString());
+        }
+    }//GEN-LAST:event_dgv_DSSACHMouseClicked
+    
+    private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
+        // TODO add your handling code here:
+        if(ctch.capNhatCTCH(mach, txt_masach.getText(), Integer.parseInt(txt_soluong10.getText()))==false)
+        {
+            JOptionPane.showMessageDialog(null,"Cập nhật không thành công!");
+        }else
+        {
+            JOptionPane.showMessageDialog(null,"Cập nhật thành công!");
+            load();
+        }
+    }//GEN-LAST:event_btn_capnhatActionPerformed
     private void initWebcam()
     {
         Dimension size = WebcamResolution.QVGA.getSize();
@@ -383,15 +446,11 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             JOptionPane.showMessageDialog(null,"Không tìm thấy sách cần tìm!");
             return;
         }
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Mã Sách");
-        model.addColumn("Tên Sách");
-        model.addColumn("Giá Bán");
-        model.addColumn("SL Tồn");
          for (Sach kh : dsKH) {
-             txt_tensach.setText(kh.getTensach());
-             txt_giasach10.setText(String.valueOf(kh.getGia()));
-             txt_soluong10.setText(String.valueOf(kh.getSl()));
+            txt_masach.setText(kh.getMasach());
+            txt_tensach.setText(kh.getTensach());
+            txt_giasach10.setText(String.valueOf(kh.getGia()));
+            txt_soluong10.setText(String.valueOf(kh.getSl()));
         }
     }  
     @Override
@@ -411,12 +470,14 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
     private javax.swing.JLayeredPane jLayeredPane10;
     private javax.swing.JLayeredPane jLayeredPane11;
     private javax.swing.JScrollPane jScrollPane13;
     private java.awt.Panel panel1;
     private java.awt.Panel panel12;
     private javax.swing.JTextField txt_giasach10;
+    private javax.swing.JTextField txt_masach;
     private javax.swing.JTextField txt_soluong10;
     private javax.swing.JTextField txt_tensach;
     // End of variables declaration//GEN-END:variables

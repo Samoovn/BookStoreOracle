@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import oracle.jdbc.OracleTypes;
 import oracle.jdbc.OracleCallableStatement;
 import java.sql.ResultSet;
+import oracle.jdbc.OracleType;
 /**
  *
  * @author DELL
@@ -49,7 +50,7 @@ public class SachDAO {
         try{
             CallableStatement cs = op.getConnection().prepareCall(sql);
             cs.registerOutParameter(1, OracleTypes.CURSOR);
-            cs.setString(2, tensach);
+            cs.setNString(2, tensach );
             cs.execute();
             ResultSet rs = ((OracleCallableStatement)cs).getCursor(1);
             while(rs.next()){
@@ -62,7 +63,6 @@ public class SachDAO {
             }
             rs.close();
             cs.close();
-            
         }
         catch(Exception e){ 
              System.out.print(e);

@@ -17,10 +17,11 @@ import BLL.OracleProvider;
  * @author DELL
  */
 public class Home extends javax.swing.JFrame {
-    
-    public Home() {
+    private String mach;
+    public Home(String mach) {
         initComponents();
         resizeImg();
+        this.mach = mach;
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,7 +37,7 @@ public class Home extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,11 +63,6 @@ public class Home extends javax.swing.JFrame {
         );
 
         jMenu4.setText("Sách");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu4MouseClicked(evt);
-            }
-        });
 
         jMenuItem1.setText("Tìm sách");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -110,8 +106,8 @@ public class Home extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu1);
 
-        jMenu7.setText("QLHD");
-        jMenuBar1.add(jMenu7);
+        jMenu6.setText("Phân quyền");
+        jMenuBar1.add(jMenu6);
 
         jMenu2.setText("Đăng xuất");
         jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -143,11 +139,7 @@ public class Home extends javax.swing.JFrame {
         Image image = (i).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         i = new ImageIcon(image);
         lb_setImage.setIcon(i);
-    }
-    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu4MouseClicked
-    FindCustomer findcus;
+    }    FindCustomer findcus;
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
         if(findcus == null || findcus.isClosed()==true)
@@ -178,7 +170,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(findB == null || findB.isClosed()==true)
         {
-            findB = new FindBook();
+            findB = new FindBook(mach);
             jDesktopPane1.add(findB);
             findB.setVisible(true);
         }else
@@ -222,7 +214,7 @@ public class Home extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
         op.connect = null;
-        login = new Login(null,null);
+        login = new Login(null,null,null);
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu2MouseClicked
@@ -257,7 +249,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Home(null).setVisible(true);
             }
         });
     }
@@ -269,7 +261,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

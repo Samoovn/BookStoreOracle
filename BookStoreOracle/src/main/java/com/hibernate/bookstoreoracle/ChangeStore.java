@@ -128,6 +128,7 @@ public class ChangeStore extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String url="jdbc:oracle:thin:@"+txt_host.getText()+":"+txt_port.getText()+":"+txt_service.getText();
+        String mach = "CH0";
         if(op.TestConnect(url)==false)
         {
             JOptionPane.showMessageDialog(null,"Kết nối thất bại!");
@@ -135,7 +136,14 @@ public class ChangeStore extends javax.swing.JFrame {
         }else
         {
             JOptionPane.showMessageDialog(null,"Kết nối thành công!");
-            Login hm = new Login(url,txt_service.getText());
+            for (int i = txt_service.getText().length() - 1; i >= 0; i--) {
+                char c = txt_service.getText().charAt(i);
+                if (Character.isDigit(c)) {
+                    mach += txt_service.getText().substring(i);
+                    break;
+                }
+            }
+            Login hm = new Login(url,txt_service.getText(),mach);
             this.dispose();      
             hm.show();
         }
@@ -144,7 +152,7 @@ public class ChangeStore extends javax.swing.JFrame {
 
     private void btn_huyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyActionPerformed
         // TODO add your handling code here:
-        Login hm = new Login(null,null);
+        Login hm = new Login(null,null, null);
         this.dispose();      
         hm.show();
     }//GEN-LAST:event_btn_huyActionPerformed

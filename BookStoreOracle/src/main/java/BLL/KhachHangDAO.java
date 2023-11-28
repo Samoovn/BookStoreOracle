@@ -47,7 +47,7 @@ public class KhachHangDAO {
             CallableStatement cs = op.getConnection().prepareCall(sql);
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.setString(2, makh);
-            cs.setString(3, tenkh);
+            cs.setNString(3, tenkh);
             cs.execute();
             ResultSet rs = ((OracleCallableStatement)cs).getCursor(1);
             while(rs.next()){
