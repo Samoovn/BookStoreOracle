@@ -122,9 +122,9 @@ public class ChangeStore extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_portActionPerformed
 
     OracleProvider op = new OracleProvider();
-    private String oldservice = op.getService();
-    private String oldport = op.getPort();
-    private String oldip = op.getIp();
+//    private String oldservice = op.getService();
+//    private String oldport = op.getPort();
+//    private String oldip = op.getIp();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String url="jdbc:oracle:thin:@"+txt_host.getText()+":"+txt_port.getText()+":"+txt_service.getText();
@@ -144,11 +144,7 @@ public class ChangeStore extends javax.swing.JFrame {
 
     private void btn_huyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyActionPerformed
         // TODO add your handling code here:
-        String url="jdbc:oracle:thin:@"+oldip+":"+oldport+":"+oldservice;
-        op.setIp(oldip);
-        op.setPort(oldport);
-        op.setService(oldservice);
-        Login hm = new Login(url,oldservice);
+        Login hm = new Login(null,null);
         this.dispose();      
         hm.show();
     }//GEN-LAST:event_btn_huyActionPerformed

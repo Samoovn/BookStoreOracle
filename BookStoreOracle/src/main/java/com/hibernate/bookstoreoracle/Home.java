@@ -11,7 +11,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-
+import BLL.OracleProvider;
 /**
  *
  * @author DELL
@@ -217,9 +217,11 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         resizeImg();
     }//GEN-LAST:event_formComponentResized
-    Login login; 
+    Login login;
+    private static OracleProvider op = new OracleProvider();
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
+        op.connect = null;
         login = new Login(null,null);
         login.setVisible(true);
         this.dispose();

@@ -7,21 +7,21 @@ import java.util.Properties;
 
 
 public class OracleProvider {
-    private static Connection connect=null;
+    public static Connection connect=null;
     private static String username;
     private static String password;
-    public static String service = "CUAHANGSACH1";
-    public static String port = "1521";
-    public static String ip = "112.197.63.187";
+    public static String service ;
+    public static String port; 
+    public static String ip ;
     public static String url="jdbc:oracle:thin:@"+ip+":"+port+":"+service;
     public OracleProvider(){
         
     }
-    public static String getUrl() {
+    public String getUrl() {
         return url;
     }
-    public static void setUrl(String url) {
-        OracleProvider.url = url;
+    public void setUrl(String url) {
+        this.url = url;
     }
     
     public String getService() {

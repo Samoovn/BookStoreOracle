@@ -4,6 +4,8 @@
  */
 package com.hibernate.bookstoreoracle;
 
+import BLL.SachDAO;
+import DAL.Sach;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -17,6 +19,7 @@ import com.google.zxing.common.HybridBinarizer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -24,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,8 +42,23 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
         initComponents();
         Color col = new Color(250, 242, 211);
         getContentPane().setBackground(col);
+        load();
     }
-
+    SachDAO sach = new SachDAO();
+    private void load()
+    {
+        ArrayList<Sach> dsKH = sach.xuatThongTinSach();
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã Sách");
+        model.addColumn("Tên Sách");
+        model.addColumn("Giá Bán");
+        model.addColumn("SL Tồn");
+         for (Sach kh : dsKH) {
+            Object[] rowData = {kh.getMasach(), kh.getTensach(), kh.getGia(), kh.getSl()};
+            model.addRow(rowData);
+        }
+        dgv_DSSACH.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +72,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
         panel12 = new java.awt.Panel();
         jLabel45 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTable13 = new javax.swing.JTable();
+        dgv_DSSACH = new javax.swing.JTable();
         btn_tim1 = new javax.swing.JButton();
         jLayeredPane11 = new javax.swing.JLayeredPane();
         btn_ok = new javax.swing.JButton();
@@ -95,7 +114,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable13.setModel(new javax.swing.table.DefaultTableModel(
+        dgv_DSSACH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -106,9 +125,14 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane13.setViewportView(jTable13);
+        jScrollPane13.setViewportView(dgv_DSSACH);
 
         btn_tim1.setText("Tìm");
+        btn_tim1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tim1ActionPerformed(evt);
+            }
+        });
 
         jLayeredPane10.setLayer(panel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane10.setLayer(jScrollPane13, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -343,10 +367,27 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
         Scanscreen.setVisible(false);
         jLayeredPane10.setVisible(true);
         btn_Scan1.setVisible(true);
+        // Đóng webcam khi nút được nhấn
+        webcam.close();
     }
     private void btn_Scan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Scan1MouseClicked
         SetLayoutScan();
     }//GEN-LAST:event_btn_Scan1MouseClicked
+
+    private void btn_tim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tim1ActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Sach> dsKH = sach.timThongTinSach(txt_tensach.getText());
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã Sách");
+        model.addColumn("Tên Sách");
+        model.addColumn("Giá Bán");
+        model.addColumn("SL Tồn");
+         for (Sach kh : dsKH) {
+            Object[] rowData = {kh.getMasach(), kh.getTensach(), kh.getGia(), kh.getSl()};
+            model.addRow(rowData);
+        }
+        dgv_DSSACH.setModel(model);
+    }//GEN-LAST:event_btn_tim1ActionPerformed
     private void initWebcam()
     {
         Dimension size = WebcamResolution.QVGA.getSize();
@@ -402,6 +443,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
     private javax.swing.JButton btn_ok;
     private javax.swing.JButton btn_themgiohang;
     private javax.swing.JButton btn_tim1;
+    private javax.swing.JTable dgv_DSSACH;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -411,7 +453,6 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
     private javax.swing.JLayeredPane jLayeredPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JTable jTable13;
     private java.awt.Panel panel1;
     private java.awt.Panel panel12;
     private java.awt.Panel pn_giohang;

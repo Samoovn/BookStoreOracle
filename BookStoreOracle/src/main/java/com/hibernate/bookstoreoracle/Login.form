@@ -24,13 +24,12 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="22" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btn_doich" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="txt_TenCuaHang" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cb_tencuahang" pref="159" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -42,11 +41,11 @@
                           <Component id="txt_mk" pref="167" max="32767" attributes="0"/>
                           <Component id="txt_tendn" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
@@ -81,7 +80,7 @@
               <EmptySpace pref="50" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btn_doich" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="txt_TenCuaHang" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cb_tencuahang" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -138,18 +137,21 @@
         <Property name="text" type="java.lang.String" value="LOGIN"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="txt_TenCuaHang">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel4"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btn_doich">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x110;&#xf4;&#x309;i c&#x1b0;&#x309;a ha&#x300;ng"/>
+        <Property name="text" type="java.lang.String" value="Th&#xea;m c&#x1b0;&#x309;a ha&#x300;ng"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_doichActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cb_tencuahang">
+      <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_tencuahangItemStateChanged"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

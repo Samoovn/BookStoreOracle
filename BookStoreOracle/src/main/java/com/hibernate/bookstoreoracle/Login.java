@@ -20,10 +20,20 @@ public class Login extends javax.swing.JFrame {
     private static Connection connect=null;
     public Login(String url, String name) {
         initComponents();
-        txt_TenCuaHang.setText(op.getService()); 
-        if(url!=null)
+        cb_tencuahang.addItem("CUAHANGSACH3");
+        cb_tencuahang.addItem("CUAHANGSACH1"); 
+        cb_tencuahang.getItemAt(0);
+        boolean ktname = false;
+        for (int i = 0; i < cb_tencuahang.getItemCount(); i++) {
+            if (name != null && name.equals(cb_tencuahang.getItemAt(i))) {
+                ktname = true;
+                break;
+            }
+        }
+        if(!ktname && url!=null)
         {
-            txt_TenCuaHang.setText(name);
+            
+            cb_tencuahang.addItem(name);
             op.setUrl(url);
         }
     }
@@ -42,8 +52,8 @@ public class Login extends javax.swing.JFrame {
         txt_tendn = new javax.swing.JTextField();
         txt_mk = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txt_TenCuaHang = new javax.swing.JLabel();
         btn_doich = new javax.swing.JButton();
+        cb_tencuahang = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,12 +78,16 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("LOGIN");
 
-        txt_TenCuaHang.setText("jLabel4");
-
-        btn_doich.setText("Đổi cửa hàng");
+        btn_doich.setText("Thêm cửa hàng");
         btn_doich.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_doichActionPerformed(evt);
+            }
+        });
+
+        cb_tencuahang.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_tencuahangItemStateChanged(evt);
             }
         });
 
@@ -82,13 +96,12 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_doich)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_TenCuaHang)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(cb_tencuahang, 0, 159, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -96,10 +109,10 @@ public class Login extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_mk, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                            .addComponent(txt_tendn))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(16, 16, 16))))
+                            .addComponent(txt_tendn))))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
                 .addGap(183, 183, 183)
                 .addComponent(jLabel3)
@@ -126,7 +139,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_doich, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_TenCuaHang))
+                    .addComponent(cb_tencuahang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
         );
 
@@ -157,6 +170,24 @@ public class Login extends javax.swing.JFrame {
         this.dispose();
         hm.show();
     }//GEN-LAST:event_btn_doichActionPerformed
+
+    private void cb_tencuahangItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_tencuahangItemStateChanged
+        // TODO add your handling code here:
+        if(cb_tencuahang.getSelectedItem() == null || cb_tencuahang.getSelectedItem().equals("CUAHANGSACH1"))
+        {
+            op.setIp("112.197.63.187");
+            op.setPort("1521");
+            op.setService("CUAHANGSACH1");
+            op.setUrl("jdbc:oracle:thin:@112.197.63.187:1521:CUAHANGSACH1");
+        }
+        else if(cb_tencuahang.getSelectedItem().equals("CUAHANGSACH3"))
+        {
+            op.setIp("112.197.63.187");
+            op.setPort("1522");
+            op.setService("CUAHANGSACH3");
+            op.setUrl("jdbc:oracle:thin:@112.197.63.187:1522:CUAHANGSACH3");
+        }
+    }//GEN-LAST:event_cb_tencuahangItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -195,11 +226,11 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_doich;
+    private javax.swing.JComboBox<String> cb_tencuahang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel txt_TenCuaHang;
     private javax.swing.JTextField txt_mk;
     private javax.swing.JTextField txt_tendn;
     // End of variables declaration//GEN-END:variables

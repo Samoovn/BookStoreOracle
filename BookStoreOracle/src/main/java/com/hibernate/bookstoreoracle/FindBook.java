@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import BLL.SachDAO;
 import DAL.Sach;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -370,10 +371,29 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             }
             if(result != null)
             {
-                txt_tensach.setText(result.getText());
+                LoadSachQR(result.getText());
             }
         }while(true);
     }
+    private void LoadSachQR(String tensach) {                                         
+        // TODO add your handling code here:
+        ArrayList<Sach> dsKH = sach.timThongTinSach(tensach);
+        if(dsKH.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Không tìm thấy sách cần tìm!");
+            return;
+        }
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã Sách");
+        model.addColumn("Tên Sách");
+        model.addColumn("Giá Bán");
+        model.addColumn("SL Tồn");
+         for (Sach kh : dsKH) {
+             txt_tensach.setText(kh.getTensach());
+             txt_giasach10.setText(String.valueOf(kh.getGia()));
+             txt_soluong10.setText(String.valueOf(kh.getSl()));
+        }
+    }  
     @Override
     public Thread newThread(Runnable r)
     {
