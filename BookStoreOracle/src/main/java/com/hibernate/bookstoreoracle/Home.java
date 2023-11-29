@@ -12,6 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import BLL.OracleProvider;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 /**
  *
  * @author DELL
@@ -20,8 +23,8 @@ public class Home extends javax.swing.JFrame {
     private String mach;
     public Home(String mach) {
         initComponents();
-        resizeImg();
         this.mach = mach;
+        resizeImg();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,7 +32,7 @@ public class Home extends javax.swing.JFrame {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        lb_setImage = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -47,19 +50,17 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        lb_setImage.setToolTipText("");
-
-        jDesktopPane1.setLayer(lb_setImage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_setImage, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_setImage, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
         );
 
         jMenu4.setText("Sách");
@@ -138,14 +139,19 @@ public class Home extends javax.swing.JFrame {
         ImageIcon i = new ImageIcon(getClass().getResource("/img/background2.jpeg"));
         Image image = (i).getImage().getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
         i = new ImageIcon(image);
-        lb_setImage.setIcon(i);
-    }    FindCustomer findcus;
+        jLabel1.setIcon(i);
+    }    
+    public JDesktopPane getDesktopPane() {
+        return jDesktopPane1;
+    }
+    
+    FindCustomer findcus;
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
         // TODO add your handling code here:
         if(findcus == null || findcus.isClosed()==true)
         {
-            findcus = new FindCustomer();
-            jDesktopPane1.add(findcus);
+            findcus = new FindCustomer(false, null, mach);
+            jDesktopPane1.add(findcus, JLayeredPane.PALETTE_LAYER);
             findcus.setVisible(true);
         }else
         {
@@ -158,7 +164,7 @@ public class Home extends javax.swing.JFrame {
          if(findor == null || findor.isClosed()==true)
         {
             findor = new FindOrder();
-            jDesktopPane1.add(findor);
+            jDesktopPane1.add(findor, JLayeredPane.PALETTE_LAYER);
             findor.setVisible(true);
         }else
         {
@@ -171,7 +177,7 @@ public class Home extends javax.swing.JFrame {
         if(findB == null || findB.isClosed()==true)
         {
             findB = new FindBook(mach);
-            jDesktopPane1.add(findB);
+            jDesktopPane1.add(findB, JLayeredPane.PALETTE_LAYER);
             findB.setVisible(true);
         }else
         {
@@ -183,8 +189,8 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(MakeB == null || MakeB.isClosed()==true)
         {
-            MakeB = new MakeOrder();
-            jDesktopPane1.add(MakeB);
+            MakeB = new MakeOrder(mach);
+            jDesktopPane1.add(MakeB, JLayeredPane.PALETTE_LAYER);
             MakeB.setVisible(true);
         }else
         {
@@ -197,7 +203,7 @@ public class Home extends javax.swing.JFrame {
         if(FindS == null || FindS.isClosed()==true)
         {
             FindS = new FindShop();
-            jDesktopPane1.add(FindS);
+            jDesktopPane1.add(FindS, JLayeredPane.PALETTE_LAYER);
             FindS.setVisible(true);
         }else
         {
@@ -256,6 +262,7 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -266,6 +273,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JLabel lb_setImage;
     // End of variables declaration//GEN-END:variables
+
 }

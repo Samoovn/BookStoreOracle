@@ -7,6 +7,13 @@ import BLL.KhachHangDAO;
 import DAL.KhachHang;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import DAL.Sach;
+import BLL.HoaDonDAO;
+import DAL.HoaDon;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import BLL.CTHDDAO;
+import javax.swing.JOptionPane;
 /**
  *
  * @author DELL
@@ -17,9 +24,16 @@ public class FindCustomer extends javax.swing.JInternalFrame {
      * Creates new form FindCustomer
      */
     KhachHangDAO kh = new KhachHangDAO();
-    public FindCustomer() {
+    boolean TaoGioHang;
+    ArrayList<Sach> ListSach;
+    String mach;
+    public FindCustomer(boolean TaoGioHang,ArrayList<Sach> ListSach, String mach) {
         initComponents();
         load();
+        this.TaoGioHang = TaoGioHang;
+        this.ListSach = ListSach;
+        XuLyTaoGioHang();
+        this.mach = mach;
     }
     private void load()
     {
@@ -34,6 +48,16 @@ public class FindCustomer extends javax.swing.JInternalFrame {
             model.addRow(rowData);
         }
         dgv_DSKH.setModel(model);
+    }
+    private void XuLyTaoGioHang()
+    {
+        if(TaoGioHang==true)
+        {
+             btn_okTaoGioHang.setVisible(true);
+        }else
+        {
+           btn_okTaoGioHang.setVisible(false);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +83,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         btn_TimKiemKH = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txt_MaKH = new javax.swing.JTextField();
+        btn_okTaoGioHang = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -119,41 +144,53 @@ public class FindCustomer extends javax.swing.JInternalFrame {
             }
         });
 
+        btn_okTaoGioHang.setText("Tiếp tục");
+        btn_okTaoGioHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_okTaoGioHangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_SDT)
-                            .addComponent(txt_DiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_TenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_MaKH)))
-                        .addGap(12, 12, 12)
-                        .addComponent(btn_TimKiemKH)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(92, Short.MAX_VALUE)
                 .addComponent(btn_ThemKH)
                 .addGap(34, 34, 34)
                 .addComponent(btn_SuaKH)
                 .addGap(108, 108, 108))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_SDT)
+                                    .addComponent(txt_DiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_TenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_MaKH)))
+                                .addGap(12, 12, 12)
+                                .addComponent(btn_TimKiemKH))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(btn_okTaoGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +220,9 @@ public class FindCustomer extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_ThemKH)
                     .addComponent(btn_SuaKH))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_okTaoGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,7 +243,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,11 +276,38 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_MaKHActionPerformed
 
+    HoaDonDAO hd = new HoaDonDAO();
+    CTHDDAO cthd = new CTHDDAO();
+    private void btn_okTaoGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okTaoGioHangActionPerformed
+        // TODO add your handling code here:
+        if(!txt_MaKH.getText().equals(""))
+        {
+            String mahd = hd.taoMaHoaDon();
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String formattedDate = dateFormat.format(date);
+            double tt= 0;
+             for (Sach sa2 : ListSach) {
+                 tt += sa2.gia*sa2.sl;
+             }
+            hd.taoHoaDon(mahd,txt_MaKH.getText(),formattedDate,mach,tt);
+            for (Sach sa : ListSach) {
+               cthd.taoCTHD(mahd, sa.getMasach(), sa.getSl());
+            }
+            JOptionPane.showMessageDialog(null,"Đã tạo hóa đơn!");
+
+        }
+        else{
+           JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
+        }
+    }//GEN-LAST:event_btn_okTaoGioHangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_SuaKH;
     private javax.swing.JButton btn_ThemKH;
     private javax.swing.JButton btn_TimKiemKH;
+    private javax.swing.JButton btn_okTaoGioHang;
     private javax.swing.JTable dgv_DSKH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
