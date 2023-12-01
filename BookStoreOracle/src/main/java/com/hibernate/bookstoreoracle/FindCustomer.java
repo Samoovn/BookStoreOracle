@@ -294,8 +294,8 @@ public class FindCustomer extends javax.swing.JInternalFrame {
             for (Sach sa : ListSach) {
                cthd.taoCTHD(mahd, sa.getMasach(), sa.getSl());
             }
-            JOptionPane.showMessageDialog(null,"Đã tạo hóa đơn!");
-
+            JOptionPane.showMessageDialog(null,"Đã tạo hóa đơn thành công!");
+            this.dispose();
         }
         else{
            JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");

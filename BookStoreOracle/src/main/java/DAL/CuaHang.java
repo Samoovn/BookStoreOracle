@@ -10,11 +10,11 @@ package DAL;
  */
 public class CuaHang {
 
-    public int getMach() {
+    public String getMach() {
         return mach;
     }
 
-    public void setMach(int mach) {
+    public void setMach(String mach) {
         this.mach = mach;
     }
 
@@ -33,7 +33,7 @@ public class CuaHang {
     public void setDiachi(String diachi) {
         this.diachi = diachi;
     }
-    public int mach;
+    public String mach;
     public String tench;
     public String diachi;
 }

@@ -21,10 +21,19 @@ import javax.swing.JLayeredPane;
  */
 public class Home extends javax.swing.JFrame {
     private String mach;
-    public Home(String mach) {
+    private String tenuser;
+    public Home(String mach, String tenuser) {
         initComponents();
         this.mach = mach;
+        this.tenuser = tenuser;
         resizeImg();
+        if(tenuser.equals("system"))
+        {
+            jMenu6.setVisible(true);
+        }else
+        {
+            jMenu6.setVisible(false);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -40,6 +49,7 @@ public class Home extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -99,15 +109,24 @@ public class Home extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu5);
 
-        jMenu1.setText("Tìm Cửa Hàng");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+        jMenu1.setText("Thông tin");
+
+        jMenuItem3.setText("Cửa hàng");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
             }
         });
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu6.setText("Phân quyền");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu6);
 
         jMenu2.setText("Đăng xuất");
@@ -197,20 +216,7 @@ public class Home extends javax.swing.JFrame {
             MakeB.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-    FindShop FindS; 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
-        if(FindS == null || FindS.isClosed()==true)
-        {
-            FindS = new FindShop();
-            jDesktopPane1.add(FindS, JLayeredPane.PALETTE_LAYER);
-            FindS.setVisible(true);
-        }else
-        {
-            FindS.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenu1MouseClicked
-
+    
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // TODO add your handling code here:
         resizeImg();
@@ -224,7 +230,33 @@ public class Home extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenu2MouseClicked
-               
+    ShopInfo FindS;
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        if(FindS == null || FindS.isClosed()==true)
+        {
+            FindS = new ShopInfo();
+            jDesktopPane1.add(FindS, JLayeredPane.PALETTE_LAYER);
+            FindS.setVisible(true);
+        }else
+        {
+            FindS.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    GrantUser grant;
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+        // TODO add your handling code here:
+        if(grant == null || grant.isClosed()==true)
+        {
+            grant = new GrantUser(tenuser);
+            jDesktopPane1.add(grant, JLayeredPane.PALETTE_LAYER);
+            grant.setVisible(true);
+        }else
+        {
+            grant.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenu6MouseClicked
+                    
     /**
      * @param args the command line arguments
      */
@@ -255,7 +287,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home(null).setVisible(true);
+                new Home(null,null).setVisible(true);
             }
         });
     }
@@ -272,6 +304,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 
