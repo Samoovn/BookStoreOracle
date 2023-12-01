@@ -2,7 +2,11 @@
 package BLL;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 
@@ -97,4 +101,22 @@ public class OracleProvider {
         }
         return ck;
     }
+//    public ArrayList<String> DSProcedure(String tenuser)
+//    {
+//        ArrayList<String> ds = new ArrayList<>();
+//         try{
+//            DatabaseMetaData metadata = connect.getMetaData();
+//            String schema = tenuser.toUpperCase();
+//            ResultSet procedures = metadata.getProcedures(null, schema, null);
+//            while (procedures.next()) {
+//                if (procedures.getString("PROCEDURE_NAME").startsWith("P")) {
+//                    ds.add(procedures.getString("PROCEDURE_NAME"));
+//                }
+//            }
+//        }
+//        catch(Exception e){ 
+//              e.printStackTrace();
+//        }
+//        return ds;
+//    }
 }

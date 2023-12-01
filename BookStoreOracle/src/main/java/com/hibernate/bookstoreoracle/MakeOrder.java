@@ -457,8 +457,6 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
     private void dgv_DSSACHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dgv_DSSACHMouseClicked
         // TODO add your handling code here:
         int row = dgv_DSSACH.rowAtPoint(evt.getPoint());
-
-        // Ensure that the click is within the bounds of the table
         if (row >= 0 ) {
             Object ma = dgv_DSSACH.getValueAt(row, 0);
             txt_masach.setText(ma.toString());
