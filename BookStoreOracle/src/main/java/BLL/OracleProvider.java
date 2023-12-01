@@ -87,7 +87,7 @@ public class OracleProvider {
         boolean ck=false;
         try {
             //Lấy một user test connect được hay không
-            connect = DriverManager.getConnection(url, "system","system123");
+            connect = DriverManager.getConnection(url, "CH2","CH2");
             ck=true;
             //Connect được thì cho về null nếu không sẽ tự đăng nhập bằng system
             connect = null;
