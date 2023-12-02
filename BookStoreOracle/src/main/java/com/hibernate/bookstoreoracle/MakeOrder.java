@@ -149,7 +149,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
         });
         jScrollPane13.setViewportView(dgv_DSSACH);
 
-        btn_tim1.setText("Tìm");
+        btn_tim1.setText("Tìm theo tên sách");
         btn_tim1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_tim1ActionPerformed(evt);

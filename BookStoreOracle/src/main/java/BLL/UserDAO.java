@@ -115,4 +115,37 @@ public class UserDAO {
         }
         return kq;
     }
+    public static boolean taoUser(String user, String pass){
+        OracleProvider op = new OracleProvider();
+        String sql= "{CALL SYSTEM.P_CREATE_USER(?,?)}";
+        boolean kq = true;
+        try{
+            CallableStatement cs = op.getConnection().prepareCall(sql);
+            cs.setString( 1, user);
+            cs.setString(2, pass);
+            cs.executeUpdate();
+            cs.close();
+        }
+        catch(Exception e){ 
+            kq=false;
+            return kq;
+        }
+        return kq;
+    }
+    public static boolean xoaUser(String user){
+        OracleProvider op = new OracleProvider();
+        String sql= "{CALL SYSTEM.P_DROP_USER(?)}";
+        boolean kq = true;
+        try{
+            CallableStatement cs = op.getConnection().prepareCall(sql);
+            cs.setString( 1, user);
+            cs.executeUpdate();
+            cs.close();
+        }
+        catch(Exception e){ 
+            kq=false;
+            return kq;
+        }
+        return kq;
+    }
 }

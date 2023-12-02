@@ -155,7 +155,7 @@
         </Container>
         <Component class="javax.swing.JButton" name="btn_tim1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ti&#x300;m"/>
+            <Property name="text" type="java.lang.String" value="Ti&#x300;m theo t&#xea;n sa&#x301;ch"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_tim1ActionPerformed"/>

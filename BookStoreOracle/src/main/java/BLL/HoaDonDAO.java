@@ -78,7 +78,7 @@ public class HoaDonDAO {
     public static String taoMaHoaDon(){
         ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
         OracleProvider op = new OracleProvider();
-        String sql= "{? = call f_tao_ma_hd}";
+        String sql= "{? = call SYSTEM.f_tao_ma_hd}";
         String mahd = "";
         try{
             CallableStatement cs = op.getConnection().prepareCall(sql);

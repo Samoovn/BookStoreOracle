@@ -30,9 +30,11 @@ public class Home extends javax.swing.JFrame {
         if(tenuser.equals("system"))
         {
             jMenu6.setVisible(true);
+            jMenu8.setVisible(true);
         }else
         {
             jMenu6.setVisible(false);
+            jMenu8.setVisible(false);
         }
     }
     @SuppressWarnings("unchecked")
@@ -40,6 +42,8 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -51,7 +55,12 @@ public class Home extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+
+        jMenuItem4.setText("jMenuItem4");
+
+        jMenu7.setText("jMenu7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -129,6 +138,14 @@ public class Home extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu6);
 
+        jMenu8.setText("Tạo user");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu8);
+
         jMenu2.setText("Đăng xuất");
         jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -190,19 +207,6 @@ public class Home extends javax.swing.JFrame {
             findor.setVisible(true);
         }
     }//GEN-LAST:event_jMenu5MouseClicked
-    FindBook findB;
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        if(findB == null || findB.isClosed()==true)
-        {
-            findB = new FindBook(mach);
-            jDesktopPane1.add(findB, JLayeredPane.PALETTE_LAYER);
-            findB.setVisible(true);
-        }else
-        {
-            findB.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
     MakeOrder MakeB; 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
@@ -256,7 +260,42 @@ public class Home extends javax.swing.JFrame {
             grant.setVisible(true);
         }
     }//GEN-LAST:event_jMenu6MouseClicked
-                    
+    FindBook findB; 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        if(findB == null || findB.isClosed()==true)
+        {
+            findB = new FindBook(mach);
+            jDesktopPane1.add(findB, JLayeredPane.PALETTE_LAYER);
+            findB.setVisible(true);
+        }else
+        {
+            findB.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    CreateUser createuser; 
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
+        // TODO add your handling code here:
+        if(grant == null || grant.isClosed()==true)
+        {
+            grant = new GrantUser(tenuser);
+            jDesktopPane1.add(grant, JLayeredPane.PALETTE_LAYER);
+            grant.setVisible(true);
+        }else
+        {
+            grant.setVisible(true);
+        }
+        if(createuser == null || createuser.isClosed()==true)
+        {
+            createuser = new CreateUser(mach,grant);
+            jDesktopPane1.add(createuser, JLayeredPane.PALETTE_LAYER);
+            createuser.setVisible(true);
+        }else
+        {
+            createuser.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenu8MouseClicked
+                       
     /**
      * @param args the command line arguments
      */
@@ -301,10 +340,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 

@@ -27,14 +27,14 @@ public class GrantUser extends javax.swing.JInternalFrame {
         buttonGroup1.add(rdo_ql);
     }
     UserDAO op = new UserDAO();
-    private void load()
+    public void load()
     {
         ArrayList<String> ds = op.xuatThongTinUser();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("USERNAME");
          for (String user : ds) {
              //Lọc nhân viên có chữ bắt đầu bằng NV
-            if(user.startsWith("NV"))
+            if(user.startsWith("CH01")||user.startsWith("CH02"))
             {
                 Object[] rowData = {user};
                 model.addRow(rowData);
@@ -191,7 +191,7 @@ public class GrantUser extends javax.swing.JInternalFrame {
         model.addColumn("USERNAME");
          for (String user : ds) {
             //Lọc nhân viên có chữ bắt đầu bằng NV
-            if(user.startsWith("NV"))
+            if(user.startsWith("CH01")||user.startsWith("CH02"))
             {
                 Object[] rowData = {user};
                 model.addRow(rowData);
