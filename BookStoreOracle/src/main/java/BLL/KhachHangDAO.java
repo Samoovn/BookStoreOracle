@@ -67,4 +67,40 @@ public class KhachHangDAO {
         }
         return dsKH;
     }
+    public static boolean createKhachHang(String makh , String tenkh,String sdt , String diachi){
+        OracleProvider op = new OracleProvider();
+        String sql = "CALL SYSTEM.P_THEM_KH@CHS_DBLINK(?,?,?,?)";
+        try{
+            CallableStatement cs = op.getConnection().prepareCall(sql);
+            cs.setString(1,makh);
+            cs.setString(2,tenkh);
+            cs.setString(3,sdt);
+            cs.setString(4,diachi);
+            cs.executeUpdate();
+            cs.close();
+            return true;
+        }
+        catch(Exception e){
+            System.out.print(e);
+            return false;
+        }
+    }
+    public static boolean updateKhachHang(String makh , String tenkh,String sdt , String diachi){
+        OracleProvider op = new OracleProvider();
+        String sql = "CALL SYSTEM.P_SUA_KH(?,?,?,?)";
+        try{
+            CallableStatement cs = op.getConnection().prepareCall(sql);
+            cs.setString(1,makh);
+            cs.setString(2,tenkh);
+            cs.setString(3,sdt);
+            cs.setString(4,diachi);
+            cs.executeUpdate();
+            cs.close();
+            return true;
+        }
+        catch(Exception e){
+            System.out.print(e);
+            return false;
+        }
+    }
 }

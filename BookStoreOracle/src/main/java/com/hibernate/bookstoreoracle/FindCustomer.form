@@ -210,11 +210,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThemKHActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_SuaKH">
           <Properties>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SuaKHActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_TimKiemKH">
           <Properties>

@@ -126,8 +126,18 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         jLabel4.setText("Địa chỉ :");
 
         btn_ThemKH.setText("Thêm");
+        btn_ThemKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemKHActionPerformed(evt);
+            }
+        });
 
         btn_SuaKH.setText("Sửa");
+        btn_SuaKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaKHActionPerformed(evt);
+            }
+        });
 
         btn_TimKiemKH.setText("Tìm Kiếm");
         btn_TimKiemKH.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +311,40 @@ public class FindCustomer extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
         }
     }//GEN-LAST:event_btn_okTaoGioHangActionPerformed
+
+    private void btn_ThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemKHActionPerformed
+        if(txt_MaKH.getText()==""){
+            return;
+        }
+        else if(txt_TenKH.getText()==""){
+            return;
+        }
+        else{
+            if(kh.createKhachHang(txt_MaKH.getText(), txt_TenKH.getText(), txt_SDT.getText(), txt_DiaChi.getText())==true){
+                JOptionPane.showMessageDialog(null,"Đã tạo Khách hàng : "+txt_TenKH.getText()+". Thành công!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
+            }
+        }
+    }//GEN-LAST:event_btn_ThemKHActionPerformed
+
+    private void btn_SuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaKHActionPerformed
+        if(txt_MaKH.getText()==""){
+            return;
+        }
+        else if(txt_TenKH.getText()==""){
+            return;
+        }
+        else{
+            if(kh.updateKhachHang(txt_MaKH.getText(), txt_TenKH.getText(), txt_SDT.getText(), txt_DiaChi.getText())==true){
+                JOptionPane.showMessageDialog(null,"Đã update Khách hàng : "+txt_TenKH.getText()+". Thành công!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
+            }
+        }
+    }//GEN-LAST:event_btn_SuaKHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
