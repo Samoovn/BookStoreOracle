@@ -10,11 +10,11 @@ package DAL;
  */
 public class CTHD {
 
-    public int getMasach() {
+    public String getMasach() {
         return masach;
     }
 
-    public void setMasach(int masach) {
+    public void setMasach(String masach) {
         this.masach = masach;
     }
 
@@ -26,14 +26,14 @@ public class CTHD {
         this.sl = sl;
     }
 
-    public int getMahd() {
+    public String getMahd() {
         return mahd;
     }
 
-    public void setMahd(int mahd) {
+    public void setMahd(String mahd) {
         this.mahd = mahd;
     }
-    public int masach;
+    public String masach;
     public int sl;
-    public int mahd;
+    public String mahd;
 }

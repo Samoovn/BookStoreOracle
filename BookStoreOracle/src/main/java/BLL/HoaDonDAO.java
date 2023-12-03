@@ -4,6 +4,7 @@
  */
 package BLL;
 import DAL.HoaDon;
+import DAL.CTHD;
 import java.util.ArrayList;
 import com.beust.jcommander.internal.Console;
 import com.sun.jdi.connect.spi.Connection;
@@ -75,6 +76,31 @@ public class HoaDonDAO {
         }
         return dshd;
     }
+    public static  ArrayList<CTHD> hienChiTietHoaDon(String mahd){
+        ArrayList<CTHD> dshd = new ArrayList<CTHD>();
+        OracleProvider op = new OracleProvider();
+        String sql= "{CALL SYSTEM.P_XEM_CTHD(?,?)}";
+        try {
+            CallableStatement cs = op.getConnection().prepareCall(sql);
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setString(2, mahd);
+            cs.execute();
+            ResultSet rs = ((OracleCallableStatement)cs).getCursor(1);
+            while (rs.next()) {                
+                CTHD item = new CTHD();
+                item.setMahd(rs.getString("MAHD"));
+                item.setMasach(rs.getString("MASACH"));
+                item.setSl(rs.getInt("SLG_BAN"));
+                dshd.add(item);
+            }
+            rs.close();
+            cs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return dshd;
+    }
     public static String taoMaHoaDon(){
         ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
         OracleProvider op = new OracleProvider();
@@ -110,4 +136,5 @@ public class HoaDonDAO {
              System.out.print(e);
         }
     }
+     
 }
