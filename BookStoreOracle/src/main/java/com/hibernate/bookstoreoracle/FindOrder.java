@@ -7,6 +7,7 @@ import BLL.HoaDonDAO;
 import DAL.HoaDon;
 import DAL.CTHD;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -101,6 +102,11 @@ public class FindOrder extends javax.swing.JInternalFrame {
         jLabel9.setText("Mã hóa đơn");
 
         btn_XoaHoaDon.setText("Xóa hoá đơn");
+        btn_XoaHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaHoaDonActionPerformed(evt);
+            }
+        });
 
         txt_TongTien4.setName("txt_NgayLap"); // NOI18N
 
@@ -290,6 +296,22 @@ public class FindOrder extends javax.swing.JInternalFrame {
             loaddgv_DSSP(selectedValue.toString());
         }
     }//GEN-LAST:event_dgv_DSHoaDonMouseClicked
+
+    private void btn_XoaHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaHoaDonActionPerformed
+        int choice = JOptionPane.showConfirmDialog(null, "Xác nhận xoá hoá đơn", "Confirmation", JOptionPane.YES_NO_OPTION);
+        if(txt_mahd.getText() == ""){
+            JOptionPane.showMessageDialog(null,"Chưa lựa chọn hoá đơn");
+            return;
+        }
+        // Check the user's choice
+        if (choice == JOptionPane.YES_OPTION) {
+            if(hd.deleteHoaDon(txt_mahd.getText())){
+                JOptionPane.showMessageDialog(null,"Xoá hoá đơn thành công");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Xoá hoá đơn thất bại");
+        }
+    }//GEN-LAST:event_btn_XoaHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

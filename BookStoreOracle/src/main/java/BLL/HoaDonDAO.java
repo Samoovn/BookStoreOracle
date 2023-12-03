@@ -136,5 +136,18 @@ public class HoaDonDAO {
              System.out.print(e);
         }
     }
-     
+     public static boolean deleteHoaDon(String mahd){
+         OracleProvider op = new OracleProvider();
+         String sql= "{CALL SYSTEM.P_XOA_HOA_DON(?)}";
+         try {
+             CallableStatement cs = op.getConnection().prepareCall(sql);
+             cs.setString(1, mahd);
+             cs.executeUpdate();
+             cs.close();
+             return true;
+         } catch (Exception e) {
+             System.out.println(e);
+             return false;
+         }
+     }
 }
