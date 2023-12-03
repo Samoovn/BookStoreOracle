@@ -13,7 +13,10 @@ import DAL.HoaDon;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import BLL.CTHDDAO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 /**
  *
  * @author DELL
@@ -27,6 +30,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
     boolean TaoGioHang;
     ArrayList<Sach> ListSach;
     String mach;
+    private Boolean flag = true; 
     public FindCustomer(boolean TaoGioHang,ArrayList<Sach> ListSach, String mach) {
         initComponents();
         load();
@@ -34,9 +38,47 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         this.ListSach = ListSach;
         XuLyTaoGioHang();
         this.mach = mach;
+       jLabel6.setVisible(false);
+        //Kiểm tra mỗi khi nhập makh
+        txt_MaKH.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if(flag==true)
+                {
+                    checkAndDisplayLabel();
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if(flag==true)
+                {
+                    checkAndDisplayLabel();
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // Được gọi khi các thuộc tính của Document thay đổi (ít được sử dụng trong trường hợp JTextField)
+            }
+        });
+
+    }
+    private void checkAndDisplayLabel(){
+        if(!kh.hienThiTenKH(txt_MaKH.getText()).equals("")){
+            txt_TenKH.setText(kh.hienThiTenKH(txt_MaKH.getText()));
+            jLabel6.setVisible(false);
+        }else{
+            jLabel6.setVisible(true);
+        }
     }
     private void load()
     {
+        txt_SDT.setVisible(false);
+        txt_DiaChi.setVisible(false);
+        lb_dchi.setVisible(false);
+        lb_sdt.setVisible(false);
+        btn_luu.setVisible(false);
         ArrayList<KhachHang> dsKH = kh.xuatThongTinKhachHang();
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Mã KH");
@@ -74,9 +116,9 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_TenKH = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lb_sdt = new javax.swing.JLabel();
         txt_SDT = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lb_dchi = new javax.swing.JLabel();
         txt_DiaChi = new javax.swing.JTextField();
         btn_ThemKH = new javax.swing.JButton();
         btn_SuaKH = new javax.swing.JButton();
@@ -84,6 +126,8 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         txt_MaKH = new javax.swing.JTextField();
         btn_okTaoGioHang = new javax.swing.JButton();
+        btn_luu = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -104,26 +148,35 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(dgv_DSKH);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("KHÁCH HÀNG");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 30, -1, -1));
 
         jLabel2.setText("Tên khách hàng :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 127, -1, -1));
 
         txt_TenKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_TenKHActionPerformed(evt);
             }
         });
+        jPanel1.add(txt_TenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 124, 180, -1));
 
-        jLabel3.setText("SDT :");
+        lb_sdt.setText("SDT :");
+        jPanel1.add(lb_sdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 205, -1, -1));
 
         txt_SDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SDTActionPerformed(evt);
             }
         });
+        jPanel1.add(txt_SDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 205, 292, -1));
 
-        jLabel4.setText("Địa chỉ :");
+        lb_dchi.setText("Địa chỉ :");
+        jPanel1.add(lb_dchi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 236, -1, -1));
+        jPanel1.add(txt_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 233, 292, -1));
 
         btn_ThemKH.setText("Thêm");
         btn_ThemKH.addActionListener(new java.awt.event.ActionListener() {
@@ -131,6 +184,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
                 btn_ThemKHActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_ThemKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 158, 85, 35));
 
         btn_SuaKH.setText("Sửa");
         btn_SuaKH.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +192,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
                 btn_SuaKHActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_SuaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 158, 86, 35));
 
         btn_TimKiemKH.setText("Tìm Kiếm");
         btn_TimKiemKH.addActionListener(new java.awt.event.ActionListener() {
@@ -145,14 +200,17 @@ public class FindCustomer extends javax.swing.JInternalFrame {
                 btn_TimKiemKHActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_TimKiemKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(282, 90, -1, 56));
 
         jLabel5.setText("Mã khách hàng :");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 93, -1, -1));
 
         txt_MaKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_MaKHActionPerformed(evt);
             }
         });
+        jPanel1.add(txt_MaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 90, 180, -1));
 
         btn_okTaoGioHang.setText("Tiếp tục");
         btn_okTaoGioHang.addActionListener(new java.awt.event.ActionListener() {
@@ -160,80 +218,19 @@ public class FindCustomer extends javax.swing.JInternalFrame {
                 btn_okTaoGioHangActionPerformed(evt);
             }
         });
+        jPanel1.add(btn_okTaoGioHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 369, 93, 53));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addComponent(btn_ThemKH)
-                .addGap(34, 34, 34)
-                .addComponent(btn_SuaKH)
-                .addGap(108, 108, 108))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_SDT)
-                                    .addComponent(txt_DiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_TenKH, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_MaKH)))
-                                .addGap(12, 12, 12)
-                                .addComponent(btn_TimKiemKH))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(btn_okTaoGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_MaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_TenKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btn_TimKiemKH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_SDT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_DiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_ThemKH)
-                    .addComponent(btn_SuaKH))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_okTaoGioHang, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
-        );
+        btn_luu.setText("Lưu");
+        btn_luu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_luu, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 267, 93, 37));
+
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Không tìm thấy khách hàng");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 68, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,10 +247,10 @@ public class FindCustomer extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,6 +266,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
     
     private void btn_TimKiemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemKHActionPerformed
         // TODO add your handling code here:
+        jLabel6.setVisible(false);
         ArrayList<KhachHang> dsKH = kh.timThongTinKhachHang(txt_MaKH.getText(), txt_TenKH.getText());
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Mã KH");
@@ -311,55 +309,139 @@ public class FindCustomer extends javax.swing.JInternalFrame {
            JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
         }
     }//GEN-LAST:event_btn_okTaoGioHangActionPerformed
-
+    String chon;
     private void btn_ThemKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemKHActionPerformed
-        if(txt_MaKH.getText()==""){
-            return;
-        }
-        else if(txt_TenKH.getText()==""){
-            return;
-        }
-        else{
-            if(kh.createKhachHang(txt_MaKH.getText(), txt_TenKH.getText(), txt_SDT.getText(), txt_DiaChi.getText())==true){
-                JOptionPane.showMessageDialog(null,"Đã tạo Khách hàng : "+txt_TenKH.getText()+". Thành công!");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
-            }
+        if(lb_dchi.isVisible()==false)
+        {
+            txt_SDT.setVisible(true);
+            txt_DiaChi.setVisible(true);
+            lb_dchi.setVisible(true);
+            lb_sdt.setVisible(true);
+            btn_luu.setVisible(true);
+            flag=false;
+            Color col = new Color(220, 53, 53);
+            btn_ThemKH.setForeground(col);
+            btn_SuaKH.setForeground(Color.BLACK);
+            chon="Them";
+        }else if(lb_dchi.isVisible()==true && btn_SuaKH.getForeground()!=Color.BLACK)
+        {
+            txt_SDT.setVisible(true);
+            txt_DiaChi.setVisible(true);
+            lb_dchi.setVisible(true);
+            lb_sdt.setVisible(true);
+            btn_luu.setVisible(true);
+            flag=false;
+            Color col = new Color(220, 53, 53);
+            btn_ThemKH.setForeground(col);
+            btn_SuaKH.setForeground(Color.BLACK);
+            chon="Them";
+        }else
+        {
+            txt_SDT.setVisible(false);
+            txt_DiaChi.setVisible(false);
+            lb_dchi.setVisible(false);
+            lb_sdt.setVisible(false);
+            btn_luu.setVisible(false);
+            flag=true;
+            Color col = new Color(220, 53, 53);
+            btn_ThemKH.setForeground(Color.BLACK);
+            chon="Them";
         }
     }//GEN-LAST:event_btn_ThemKHActionPerformed
 
     private void btn_SuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaKHActionPerformed
-        if(txt_MaKH.getText()==""){
-            return;
-        }
-        else if(txt_TenKH.getText()==""){
-            return;
-        }
-        else{
-            if(kh.updateKhachHang(txt_MaKH.getText(), txt_TenKH.getText(), txt_SDT.getText(), txt_DiaChi.getText())==true){
-                JOptionPane.showMessageDialog(null,"Đã update Khách hàng : "+txt_TenKH.getText()+". Thành công!");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
-            }
+       if(lb_dchi.isVisible()==false)
+        {
+            txt_SDT.setVisible(true);
+            txt_DiaChi.setVisible(true);
+            lb_dchi.setVisible(true);
+            lb_sdt.setVisible(true);
+            btn_luu.setVisible(true);
+            flag=false;
+            Color col = new Color(220, 53, 53);
+            btn_SuaKH.setForeground(col);
+            btn_ThemKH.setForeground(Color.BLACK);
+            chon="Sua";
+        }else if(lb_dchi.isVisible()==true && btn_ThemKH.getForeground()!=Color.BLACK)
+        {   
+            txt_SDT.setVisible(true);
+            txt_DiaChi.setVisible(true);
+            lb_dchi.setVisible(true);
+            lb_sdt.setVisible(true);
+            btn_luu.setVisible(true);
+            flag=false;
+            Color col = new Color(220, 53, 53);
+            btn_SuaKH.setForeground(col);
+            btn_ThemKH.setForeground(Color.BLACK);
+            chon="Sua";
+        }else
+        {
+            txt_SDT.setVisible(false);
+            txt_DiaChi.setVisible(false);
+            lb_dchi.setVisible(false);
+            lb_sdt.setVisible(false);
+            btn_luu.setVisible(false);
+            flag=true;
+            Color col = new Color(220, 53, 53);
+            btn_SuaKH.setForeground(Color.BLACK);
+            chon="Sua";
         }
     }//GEN-LAST:event_btn_SuaKHActionPerformed
+
+    private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
+        // TODO add your handling code here:
+        if(chon.equals("Them"))
+        {
+            if(txt_MaKH.getText()==""){
+                return;
+            }
+            else if(txt_TenKH.getText()==""){
+                return;
+            }
+            else{
+                if(kh.createKhachHang(txt_MaKH.getText(), txt_TenKH.getText(), txt_SDT.getText(), txt_DiaChi.getText())==true){
+                    JOptionPane.showMessageDialog(null,"Đã tạo Khách hàng : "+txt_TenKH.getText()+". Thành công!");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
+                }
+            }
+        }else if(chon.equals("Sua"))
+        {
+            if(txt_MaKH.getText()==""){
+               return;
+            }
+            else if(txt_TenKH.getText()==""){
+               return;
+            }
+            else{
+               if(kh.updateKhachHang(txt_MaKH.getText(), txt_TenKH.getText(), txt_SDT.getText(), txt_DiaChi.getText())==true){
+                   JOptionPane.showMessageDialog(null,"Đã update Khách hàng : "+txt_TenKH.getText()+". Thành công!");
+               }
+               else{
+                   JOptionPane.showMessageDialog(null,"Vui lòng nhập đầy đủ thông tin!");
+               }
+            }
+        }
+        load();
+    }//GEN-LAST:event_btn_luuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_SuaKH;
     private javax.swing.JButton btn_ThemKH;
     private javax.swing.JButton btn_TimKiemKH;
+    private javax.swing.JButton btn_luu;
     private javax.swing.JButton btn_okTaoGioHang;
     private javax.swing.JTable dgv_DSKH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_dchi;
+    private javax.swing.JLabel lb_sdt;
     private javax.swing.JTextField txt_DiaChi;
     private javax.swing.JTextField txt_MaKH;
     private javax.swing.JTextField txt_SDT;

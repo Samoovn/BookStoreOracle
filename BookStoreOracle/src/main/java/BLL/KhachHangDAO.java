@@ -103,4 +103,26 @@ public class KhachHangDAO {
             return false;
         }
     }
+     public static String hienThiTenKH(String makh){
+        String tenkh = "";
+        OracleProvider op = new OracleProvider();
+        String sql= "{CALL SYSTEM.P_TIM_TEN_KH(?,?)}";
+        try{
+            CallableStatement cs = op.getConnection().prepareCall(sql);
+            cs.registerOutParameter(1, OracleTypes.CURSOR);
+            cs.setString(2, makh);
+            cs.execute();
+            ResultSet rs = ((OracleCallableStatement)cs).getCursor(1);
+            while(rs.next()){
+                tenkh = rs.getNString("TENKH");
+            }
+            rs.close();
+            cs.close();
+            
+        }
+        catch(Exception e){ 
+             System.out.print(e);
+        }
+        return tenkh;
+    }
 }

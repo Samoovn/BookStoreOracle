@@ -31,10 +31,12 @@ public class Home extends javax.swing.JFrame {
         {
             jMenu6.setVisible(true);
             jMenu8.setVisible(true);
+            jMenu9.setVisible(true);
         }else
         {
             jMenu6.setVisible(false);
             jMenu8.setVisible(false);
+            jMenu9.setVisible(false);
         }
     }
     @SuppressWarnings("unchecked")
@@ -304,10 +306,18 @@ public class Home extends javax.swing.JFrame {
             createuser.setVisible(true);
         }
     }//GEN-LAST:event_jMenu8MouseClicked
-
+    Backup db;
     private void jMenu9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu9MouseClicked
         // TODO add your handling code here:
-        
+        if(db == null || db.isClosed()==true)
+        {
+            db = new Backup();
+            jDesktopPane1.add(db, JLayeredPane.PALETTE_LAYER);
+            db.setVisible(true);
+        }else
+        {
+            db.setVisible(true);
+        }
     }//GEN-LAST:event_jMenu9MouseClicked
                        
     /**
