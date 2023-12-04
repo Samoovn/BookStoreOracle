@@ -43,14 +43,15 @@ public class SachDAO {
         }
         return dss;
     }
-     public static ArrayList<Sach> timThongTinSach(String tensach){
+     public static ArrayList<Sach> timThongTinSach(String tensach,String masach){
         ArrayList<Sach> dss = new ArrayList<Sach>();
         OracleProvider op = new OracleProvider();
-        String sql= "{CALL SYSTEM.P_TIM_SACH(?,?)}";
+        String sql= "{CALL SYSTEM.P_TIM_SACH(?,?,?)}";
         try{
             CallableStatement cs = op.getConnection().prepareCall(sql);
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.setNString(2, tensach );
+            cs.setString(3, masach );
             cs.execute();
             ResultSet rs = ((OracleCallableStatement)cs).getCursor(1);
             while(rs.next()){

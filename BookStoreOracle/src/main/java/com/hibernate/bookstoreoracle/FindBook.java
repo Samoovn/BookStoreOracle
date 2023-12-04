@@ -27,11 +27,25 @@ import javax.swing.JPanel;
 import BLL.SachDAO;
 import BLL.CTCHDAO;
 import DAL.Sach;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageConfig;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import java.awt.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 
 /**
  *
@@ -82,6 +96,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
         jScrollPane13 = new javax.swing.JScrollPane();
         dgv_DSSACH = new javax.swing.JTable();
         btn_tim1 = new javax.swing.JButton();
+        btn_qr = new javax.swing.JButton();
         jLayeredPane11 = new javax.swing.JLayeredPane();
         btn_capnhat = new javax.swing.JButton();
         txt_soluong10 = new javax.swing.JTextField();
@@ -147,9 +162,17 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             }
         });
 
+        btn_qr.setText("Tạo QR");
+        btn_qr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_qrActionPerformed(evt);
+            }
+        });
+
         jLayeredPane10.setLayer(panel12, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane10.setLayer(jScrollPane13, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane10.setLayer(btn_tim1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane10.setLayer(btn_qr, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane10Layout = new javax.swing.GroupLayout(jLayeredPane10);
         jLayeredPane10.setLayout(jLayeredPane10Layout);
@@ -157,7 +180,9 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btn_tim1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_tim1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(btn_qr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -174,6 +199,8 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
                 .addContainerGap(9, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_qr, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btn_tim1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
         );
@@ -355,7 +382,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
 
     private void btn_tim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tim1ActionPerformed
         // TODO add your handling code here:
-        ArrayList<Sach> dsKH = sach.timThongTinSach(txt_tensach.getText());
+        ArrayList<Sach> dsKH = sach.timThongTinSach(txt_tensach.getText(),txt_masach.getText());
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Mã Sách");
         model.addColumn("Tên Sách");
@@ -395,6 +422,33 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             load();
         }
     }//GEN-LAST:event_btn_capnhatActionPerformed
+
+    private void btn_qrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_qrActionPerformed
+        // TODO add your handling code here:
+        try{
+            String QrCode = txt_masach.getText();
+            String charset = "UTF-8";
+            ByteArrayOutputStream out = QRCode.from(new String (QrCode.getBytes(charset),charset)).to(ImageType.PNG).stream();
+            String f_name = txt_masach.getText();
+            String path_name = "D:\\";
+            FileOutputStream export_img = new FileOutputStream(new File(path_name+(f_name +".png")));
+            export_img.write(out.toByteArray());
+            export_img.flush();
+
+//              String path_name = "D:\\"+txt_tensach.getText()+".PNG";
+//              
+//              Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+//              hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+//              BitMatrix matrix = new MultiFormatWriter().encode(
+//                      new String (QrCode.getBytes(charset),charset),
+//                      BarcodeFormat.QR_CODE, 200, 200, hintMap);
+//              MatrixToImageWriter.writeToFile(matrix, path_name.substring(path_name.lastIndexOf('.')+1), new File(path_name));
+              
+        }catch(Exception e)
+        {
+            System.out.println("Lỗi");
+        }
+    }//GEN-LAST:event_btn_qrActionPerformed
     private void initWebcam()
     {
         Dimension size = WebcamResolution.QVGA.getSize();
@@ -439,7 +493,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
     }
     private void LoadSachQR(String tensach) {                                         
         // TODO add your handling code here:
-        ArrayList<Sach> dsKH = sach.timThongTinSach(tensach);
+        ArrayList<Sach> dsKH = sach.timThongTinSach(tensach,tensach);
         if(dsKH.isEmpty())
         {
             JOptionPane.showMessageDialog(null,"Không tìm thấy sách cần tìm!");
@@ -462,6 +516,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Scan1;
     private javax.swing.JButton btn_capnhat;
+    private javax.swing.JButton btn_qr;
     private javax.swing.JButton btn_tim1;
     private javax.swing.JTable dgv_DSSACH;
     private javax.swing.JLabel jLabel1;

@@ -255,8 +255,6 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
         ));
         jScrollPane12.setViewportView(dgv_giohang);
 
-        txt_masach.setEnabled(false);
-
         jLabel46.setText("Mã sách");
 
         btn_resetgiohang.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -440,7 +438,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
 
     private void btn_tim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tim1ActionPerformed
         // TODO add your handling code here:
-        ArrayList<Sach> dsKH = sach.timThongTinSach(txt_tensach.getText());
+        ArrayList<Sach> dsKH = sach.timThongTinSach(txt_tensach.getText(),txt_masach.getText());
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Mã Sách");
         model.addColumn("Tên Sách");
@@ -566,7 +564,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
     }
     private void LoadSachQR(String tensach) {                                         
         // TODO add your handling code here:
-        ArrayList<Sach> dsKH = sach.timThongTinSach(tensach);
+        ArrayList<Sach> dsKH = sach.timThongTinSach(tensach,tensach);
         if(dsKH.isEmpty())
         {
             JOptionPane.showMessageDialog(null,"Không tìm thấy sách cần tìm!");
