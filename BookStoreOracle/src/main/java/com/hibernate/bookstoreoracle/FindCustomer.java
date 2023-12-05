@@ -13,24 +13,55 @@ import DAL.HoaDon;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import BLL.CTHDDAO;
+import Bookstoreoracle.ReportManager;
+import DAL.FieldReportClass;
+import DAL.TotalReportClass;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Result;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.common.HybridBinarizer;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 /**
  *
  * @author DELL
  */
-public class FindCustomer extends javax.swing.JInternalFrame {
+public class FindCustomer extends javax.swing.JInternalFrame implements Runnable,ThreadFactory{
 
-    /**
-     * Creates new form FindCustomer
-     */
     KhachHangDAO kh = new KhachHangDAO();
     boolean TaoGioHang;
     ArrayList<Sach> ListSach;
     String mach;
-    private Boolean flag = true; 
+    private Boolean flag = true;
     public FindCustomer(boolean TaoGioHang,ArrayList<Sach> ListSach, String mach) {
         initComponents();
         load();
@@ -39,6 +70,13 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         XuLyTaoGioHang();
         this.mach = mach;
        jLabel6.setVisible(false);
+        //In hoa don
+        try{
+            ReportManager.getinstance().bienDichReport();
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         //Kiểm tra mỗi khi nhập makh
         txt_MaKH.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -110,8 +148,6 @@ public class FindCustomer extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        dgv_DSKH = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -128,25 +164,16 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         btn_okTaoGioHang = new javax.swing.JButton();
         btn_luu = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        btn_Scan1 = new javax.swing.JButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        dgv_DSKH = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setPreferredSize(new java.awt.Dimension(830, 467));
-
-        dgv_DSKH.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(dgv_DSKH);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -232,25 +259,67 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         jLabel6.setText("Không tìm thấy khách hàng");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 68, -1, -1));
 
+        btn_Scan1.setText("QR Scan");
+        btn_Scan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_Scan1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(btn_Scan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        dgv_DSKH.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(dgv_DSKH);
+
+        jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLayeredPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -286,6 +355,34 @@ public class FindCustomer extends javax.swing.JInternalFrame {
 
     HoaDonDAO hd = new HoaDonDAO();
     CTHDDAO cthd = new CTHDDAO();
+    private boolean saveImage(byte[] imageBytes, String filePath) {
+        try {
+            Path path = Paths.get(filePath);
+            Files.write(path, imageBytes);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public InputStream generateQR() throws WriterException{
+        try{
+            String QrCode = txt_MaKH.getText();
+            String charset = "UTF-8";
+            ByteArrayOutputStream out = QRCode.from(new String (QrCode.getBytes(charset),charset)).to(ImageType.PNG).stream();
+            String f_name = txt_MaKH.getText();
+            String path_name = "D:\\";
+            if (saveImage(out.toByteArray(), path_name + f_name + ".png")) {
+                return new ByteArrayInputStream(out.toByteArray());
+            } else {
+                System.out.println("Lỗi khi lưu hình ảnh QR code");
+            }
+        }catch(Exception e)
+        {
+            System.out.println("Lỗi");
+        }
+        return null;
+    }
     private void btn_okTaoGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okTaoGioHangActionPerformed
         // TODO add your handling code here:
         if(!txt_MaKH.getText().equals(""))
@@ -302,7 +399,27 @@ public class FindCustomer extends javax.swing.JInternalFrame {
             for (Sach sa : ListSach) {
                cthd.taoCTHD(mahd, sa.getMasach(), sa.getSl());
             }
-            JOptionPane.showMessageDialog(null,"Đã tạo hóa đơn thành công!");
+            int choice = JOptionPane.showConfirmDialog(null, "Tạo hóa đơn thàn công! Bạn muốn in hóa đơn thành công không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (choice == JOptionPane.YES_OPTION) {
+                try{
+                    List<FieldReportClass> fields = new ArrayList<>();
+                    // Tạo mẫu định dạng tiền VND với chấm phân tách mỗi 3 số
+                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###.##");
+                    for (Sach sa3 : ListSach) {
+                        
+                        String GIA = decimalFormat.format(sa3.getGia());
+                        String THANHTIEN = decimalFormat.format(sa3.getSl()*sa3.getGia());
+                        fields.add(new FieldReportClass(sa3.getTensach(),sa3.getSl(),GIA,THANHTIEN));
+                    }
+                    decimalFormat = new DecimalFormat("###,###,###.## VND");
+                    String THANHTIEN = decimalFormat.format(tt);
+                    TotalReportClass dataprint = new TotalReportClass(mahd, txt_TenKH.getText(), THANHTIEN, generateQR(), fields);
+                    ReportManager.getinstance().printReport(dataprint);
+                }catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
             this.dispose();
         }
         else{
@@ -426,8 +543,115 @@ public class FindCustomer extends javax.swing.JInternalFrame {
         load();
     }//GEN-LAST:event_btn_luuActionPerformed
 
-
+    private void btn_Scan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Scan1MouseClicked
+        SetLayoutScan();
+    }//GEN-LAST:event_btn_Scan1MouseClicked
+    private JPanel Scanscreen;
+    private JButton btn_timSach;
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+     private void btn_TimSachClicked(java.awt.event.MouseEvent evt) {
+        btn_timSach.setVisible(false);
+        Scanscreen.setVisible(false);
+        jLayeredPane1.setVisible(true);
+        btn_Scan1.setVisible(true);
+        btn_TimKiemKH.setVisible(true);
+        flag =true;
+         // Đóng webcam khi nút được nhấn
+        webcam.close();
+    }
+    
+    private void SetLayoutScan()
+    {
+        jLayeredPane1.setVisible(false);
+        btn_Scan1.setVisible(false);
+        btn_TimKiemKH.setVisible(false);
+        jLabel6.setVisible(false);
+        flag =false;
+        btn_timSach = new JButton();
+        btn_timSach.setText("Tìm theo nhập liệu");
+        btn_timSach.setBounds(450, 10, 150, 30);
+        btn_timSach.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimSachClicked(evt);
+            }
+        });
+        Scanscreen = new JPanel();
+        Scanscreen.setBounds(5, 30, 422, 390);
+        Scanscreen.setBackground(Color.black);
+        this.add(btn_timSach);
+        this.add(Scanscreen);
+        jPanel1.setBounds(435, 20, jPanel1.getWidth(), jPanel1.getHeight());
+        this.add(jPanel1);
+        initWebcam();
+    }
+    private void initWebcam()
+    {
+        Dimension size = WebcamResolution.QVGA.getSize();
+        webcam = Webcam.getWebcams().get(0);
+        webcam.setViewSize(size);
+        panel = new WebcamPanel(webcam);
+        panel.setPreferredSize(size);
+        panel.setFPSDisplayed(true);
+        Scanscreen.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,470, 300));
+        executor.execute(this);
+    }
+    @Override
+    public void run(){
+        do{
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FindBook.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Result result = null;
+            BufferedImage image = null;
+            if(webcam.isOpen())
+            {
+                if((image = webcam.getImage())==null)
+                {
+                    continue;
+                }
+            }
+            LuminanceSource source = new BufferedImageLuminanceSource(image);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+            
+            try {
+                result = new MultiFormatReader().decode(bitmap);
+            } catch (NotFoundException ex) {
+                Logger.getLogger(FindBook.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if(result != null)
+            {
+                LoadKHQR(result.getText());
+            }
+        }while(true);
+    }
+    private void LoadKHQR(String makh) {                                         
+        // TODO add your handling code here:
+        ArrayList<KhachHang> dsKH = kh.timThongTinKhachHang(makh, makh);
+        if(dsKH.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Không tìm thấy khách hàng cần tìm!");
+            return;
+        }
+         for (KhachHang kh : dsKH) {
+            txt_MaKH.setText(kh.getMakh());
+            txt_TenKH.setText(kh.getTenkh());
+            txt_DiaChi.setText(kh.getDiachi());
+            txt_SDT.setText(kh.getSDT());
+        }
+    }  
+    @Override
+    public Thread newThread(Runnable r)
+    {
+        Thread t = new Thread(r,"My Thread");
+        t.setDaemon(true);
+        return t;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_Scan1;
     private javax.swing.JButton btn_SuaKH;
     private javax.swing.JButton btn_ThemKH;
     private javax.swing.JButton btn_TimKiemKH;
@@ -438,6 +662,7 @@ public class FindCustomer extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_dchi;

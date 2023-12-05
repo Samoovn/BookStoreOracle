@@ -30,6 +30,7 @@ import DAL.Sach;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
@@ -39,11 +40,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 import java.awt.*;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
 
@@ -422,7 +430,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             load();
         }
     }//GEN-LAST:event_btn_capnhatActionPerformed
-
+    
     private void btn_qrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_qrActionPerformed
         // TODO add your handling code here:
         try{
@@ -433,20 +441,12 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             String path_name = "D:\\";
             FileOutputStream export_img = new FileOutputStream(new File(path_name+(f_name +".png")));
             export_img.write(out.toByteArray());
-            export_img.flush();
-
-//              String path_name = "D:\\"+txt_tensach.getText()+".PNG";
-//              
-//              Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-//              hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-//              BitMatrix matrix = new MultiFormatWriter().encode(
-//                      new String (QrCode.getBytes(charset),charset),
-//                      BarcodeFormat.QR_CODE, 200, 200, hintMap);
-//              MatrixToImageWriter.writeToFile(matrix, path_name.substring(path_name.lastIndexOf('.')+1), new File(path_name));
-              
+            export_img.flush(); 
         }catch(Exception e)
         {
             System.out.println("Lỗi");
+            JOptionPane.showMessageDialog(null,"Nhập mã sách!");
+
         }
     }//GEN-LAST:event_btn_qrActionPerformed
     private void initWebcam()
@@ -493,17 +493,17 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
     }
     private void LoadSachQR(String tensach) {                                         
         // TODO add your handling code here:
-        ArrayList<Sach> dsKH = sach.timThongTinSach(tensach,tensach);
-        if(dsKH.isEmpty())
+        ArrayList<Sach> dsSA = sach.timThongTinSach(tensach,tensach);
+        if(dsSA.isEmpty())
         {
             JOptionPane.showMessageDialog(null,"Không tìm thấy sách cần tìm!");
             return;
         }
-         for (Sach kh : dsKH) {
-            txt_masach.setText(kh.getMasach());
-            txt_tensach.setText(kh.getTensach());
-            txt_giasach10.setText(String.valueOf(kh.getGia()));
-            txt_soluong10.setText(String.valueOf(kh.getSl()));
+         for (Sach sa : dsSA) {
+            txt_masach.setText(sa.getMasach());
+            txt_tensach.setText(sa.getTensach());
+            txt_giasach10.setText(String.valueOf(sa.getGia()));
+            txt_soluong10.setText(String.valueOf(sa.getSl()));
         }
     }  
     @Override

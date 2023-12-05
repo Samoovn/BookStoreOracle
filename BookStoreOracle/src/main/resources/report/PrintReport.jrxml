@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="842" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="0" uuid="deb67812-36d5-4058-bd33-51083be42012">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="MAHD" class="java.lang.String"/>
+	<parameter name="KH" class="java.lang.String"/>
+	<parameter name="TOTAL" class="java.lang.String"/>
+	<parameter name="QR KH" class="java.io.InputStream"/>
+	<field name="TEN" class="java.lang.String"/>
+	<field name="SL" class="java.lang.Integer"/>
+	<field name="GIA" class="java.lang.String"/>
+	<field name="THANHTIEN" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement x="52" y="15" width="100" height="19" uuid="7c71ae03-a316-44a9-984c-0e8427f4958c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Roboto" size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HOA DON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="52" height="18" uuid="99b9b9f7-60d4-4f3c-9424-6e1dce2039ea"/>
+				<textElement>
+					<font fontName="Roboto" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Khach Hang:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="54" width="52" height="20" uuid="82ae301f-ad5d-4db6-b774-79ea4cd0daa0"/>
+				<textElement>
+					<font fontName="Roboto" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MA HOA DON:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="54" width="100" height="20" uuid="f420ec1d-e395-457f-9c0e-e52cb9163cea"/>
+				<textElement>
+					<font fontName="Roboto" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{MAHD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="74" width="100" height="19" uuid="119110ac-a59e-438e-b9ec-d4332c95c98d"/>
+				<textElement>
+					<font fontName="Roboto" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{KH}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="11">
+			<staticText>
+				<reportElement x="0" y="0" width="67" height="11" uuid="8ae05420-d98b-4542-a233-03a84169ee6c"/>
+				<box>
+					<bottomPen lineWidth="0.8" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.8" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Roboto" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TEN SAN PHAM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="105" y="0" width="42" height="11" uuid="02f3b5d5-f85b-48e7-ba8a-15373e2438cf"/>
+				<box>
+					<bottomPen lineWidth="0.8" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.8" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="1" width="56" height="10" uuid="c0e89232-808c-45f3-96bb-b426daeafaeb"/>
+				<box>
+					<pen lineStyle="Dashed"/>
+					<topPen lineStyle="Dashed"/>
+					<leftPen lineStyle="Dashed"/>
+					<bottomPen lineWidth="0.8" lineStyle="Dashed"/>
+					<rightPen lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THANH TIEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="0" width="38" height="11" uuid="19669eb7-f3f5-4483-ab41-2eb7b67f0bb0"/>
+				<box>
+					<bottomPen lineWidth="0.8" lineStyle="Dashed"/>
+					<rightPen lineWidth="0.8" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SO LUONG]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="67" height="17" uuid="d9640ad0-0d9f-44f5-bb94-dc98e837a95a"/>
+				<box>
+					<rightPen lineWidth="0.8"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Roboto" size="4"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="0" width="38" height="17" uuid="64ccb23d-f6bc-4710-8e6f-e91d85b836ca"/>
+				<box>
+					<rightPen lineWidth="0.8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto" size="4"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="0" width="42" height="17" uuid="7cbd150e-71cc-4129-8d5d-47c0b2e2a2ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto" size="4"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="0" width="57" height="17" uuid="1cb959bf-bc69-42be-aade-d91a04c08abb"/>
+				<box>
+					<leftPen lineWidth="0.8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Roboto" size="4"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{THANHTIEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="6" width="82" height="18" uuid="02449fad-6df5-42e3-97b2-0b7b5d98821d"/>
+				<textElement>
+					<font fontName="Roboto" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tong Tien:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="82" y="6" width="122" height="19" uuid="b176b3c5-7a1d-4bf8-afc7-2056136ce023"/>
+				<textElement textAlignment="Right">
+					<font fontName="Roboto" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TOTAL}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="55" width="203" height="72" uuid="86acb307-9411-4e61-8169-804b6502435c"/>
+				<imageExpression><![CDATA[$P{QR KH}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="64" y="37" width="60" height="13" uuid="203b0c39-977a-4555-84f2-38535ed63a13"/>
+				<textElement>
+					<font fontName="Roboto" size="7"/>
+				</textElement>
+				<text><![CDATA[QR KHACH HANG]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="0" width="203" height="1" uuid="4f1033ba-25c8-4bce-9038-9f48514173c8"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
