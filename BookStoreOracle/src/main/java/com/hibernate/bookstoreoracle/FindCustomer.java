@@ -396,10 +396,10 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
                  tt += sa2.gia*sa2.sl;
              }
             hd.taoHoaDon(mahd,txt_MaKH.getText(),formattedDate,mach,tt);
-            for (Sach sa : ListSach) {
+           for (Sach sa : ListSach) {
                cthd.taoCTHD(mahd, sa.getMasach(), sa.getSl());
             }
-            int choice = JOptionPane.showConfirmDialog(null, "Tạo hóa đơn thàn công! Bạn muốn in hóa đơn thành công không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(null, "Tạo hóa đơn thành công! Bạn muốn in hóa đơn thành công không?", "Xác nhận", JOptionPane.YES_NO_OPTION);
             if (choice == JOptionPane.YES_OPTION) {
                 try{
                     List<FieldReportClass> fields = new ArrayList<>();

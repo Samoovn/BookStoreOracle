@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="842" columnWidth="204" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="0" uuid="deb67812-36d5-4058-bd33-51083be42012">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="4"/>
 	<parameter name="MAHD" class="java.lang.String"/>
 	<parameter name="KH" class="java.lang.String"/>
 	<parameter name="TOTAL" class="java.lang.String"/>
@@ -170,8 +170,8 @@
 				<imageExpression><![CDATA[$P{QR KH}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="64" y="37" width="60" height="13" uuid="203b0c39-977a-4555-84f2-38535ed63a13"/>
-				<textElement>
+				<reportElement x="1" y="42" width="202" height="13" uuid="203b0c39-977a-4555-84f2-38535ed63a13"/>
+				<textElement textAlignment="Center">
 					<font fontName="Roboto" size="7"/>
 				</textElement>
 				<text><![CDATA[QR KHACH HANG]]></text>

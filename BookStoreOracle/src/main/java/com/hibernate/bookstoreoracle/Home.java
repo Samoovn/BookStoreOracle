@@ -32,11 +32,15 @@ public class Home extends javax.swing.JFrame {
             jMenu6.setVisible(true);
             jMenu8.setVisible(true);
             jMenu9.setVisible(true);
+            jMenu10.setVisible(true);
+            jMenu11.setVisible(true);
         }else
         {
             jMenu6.setVisible(false);
             jMenu8.setVisible(false);
             jMenu9.setVisible(false);
+            jMenu10.setVisible(false);
+            jMenu11.setVisible(false);
         }
     }
     @SuppressWarnings("unchecked")
@@ -59,6 +63,8 @@ public class Home extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         jMenuItem4.setText("jMenuItem4");
@@ -78,11 +84,11 @@ public class Home extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
         );
 
         jMenu4.setText("Sách");
@@ -156,6 +162,22 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(jMenu9);
+
+        jMenu10.setText("Theo dõi session");
+        jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu10MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu10);
+
+        jMenu11.setText("QL tài nguyên");
+        jMenu11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu11MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu11);
 
         jMenu2.setText("Đăng xuất");
         jMenu2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -319,6 +341,33 @@ public class Home extends javax.swing.JFrame {
             db.setVisible(true);
         }
     }//GEN-LAST:event_jMenu9MouseClicked
+    SessionView ssv;
+    private void jMenu10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu10MouseClicked
+        // TODO add your handling code here:
+        if(ssv == null || ssv.isClosed()==true)
+        {
+            ssv = new SessionView();
+            jDesktopPane1.add(ssv, JLayeredPane.PALETTE_LAYER);
+            ssv.setVisible(true);
+        }else
+        {
+            ssv.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenu10MouseClicked
+    
+    ManagerResource mns;
+    private void jMenu11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu11MouseClicked
+        // TODO add your handling code here:
+        if(mns == null || mns.isClosed()==true)
+        {
+            mns = new ManagerResource();
+            jDesktopPane1.add(mns, JLayeredPane.PALETTE_LAYER);
+            mns.setVisible(true);
+        }else
+        {
+            mns.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenu11MouseClicked
                        
     /**
      * @param args the command line arguments
@@ -359,6 +408,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
