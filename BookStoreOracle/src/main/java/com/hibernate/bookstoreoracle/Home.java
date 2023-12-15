@@ -333,7 +333,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(db == null || db.isClosed()==true)
         {
-            db = new Backup();
+            db = new Backup(mach);
             jDesktopPane1.add(db, JLayeredPane.PALETTE_LAYER);
             db.setVisible(true);
         }else

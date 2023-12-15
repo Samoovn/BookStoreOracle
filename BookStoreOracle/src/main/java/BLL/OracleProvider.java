@@ -71,7 +71,7 @@ public class OracleProvider {
     public static Connection getConnection(){    
         if (connect==null){
            try{                        
-            if(username!=null && username.equals("SYS")){
+            if(username!=null && username.equals("sys")){
                 connect = DriverManager.getConnection(url, 
                     username.toUpperCase() + " as sysdba", password);
             }

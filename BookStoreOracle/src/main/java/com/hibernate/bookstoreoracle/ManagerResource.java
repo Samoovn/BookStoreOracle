@@ -29,12 +29,12 @@ public class ManagerResource extends javax.swing.JInternalFrame {
         
         OracleProvider op = new OracleProvider();
         try {
-            // Thực hiện các lệnh SQL và hiển thị kết quả trong bảng
             executeQuery(op.getConnection(), "SELECT FILE_NAME, TABLESPACE_NAME FROM DBA_DATA_FILES");
             dgv_manager1.setModel(tableModel);
             executeQuery(op.getConnection(), "SELECT * FROM V$CONTROLFILE");
             dgv_manager2.setModel(tableModel);
-            executeQuery(op.getConnection(), "SELECT RESOURCE_NAME, CURRENT_UTILIZATION, MAX_UTILIZATION FROM V$RESOURCE_LIMIT");
+            executeQuery(op.getConnection(), "SELECT RESOURCE_NAME, CURRENT_UTILIZATION, "
+                    + "MAX_UTILIZATION FROM V$RESOURCE_LIMIT");
             dgv_manager3.setModel(tableModel);
             executeQuery(op.getConnection(), "SELECT INSTANCE_NAME FROM V$INSTANCE");
             dgv_manager4.setModel(tableModel);
@@ -50,9 +50,7 @@ public class ManagerResource extends javax.swing.JInternalFrame {
     private void executeQuery(Connection connection, String sql) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();
-        // Xóa dữ liệu cũ từ bảng
         tableModel = new DefaultTableModel();
-        // Lấy thông tin cột từ kết quả
         int columnCount = resultSet.getMetaData().getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             tableModel.addColumn(resultSet.getMetaData().getColumnName(i));
@@ -64,8 +62,6 @@ public class ManagerResource extends javax.swing.JInternalFrame {
             }
             tableModel.addRow(rowData);
         }
-
-        // Đóng tài nguyên
         resultSet.close();
         statement.close();
     }

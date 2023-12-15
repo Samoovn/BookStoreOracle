@@ -418,9 +418,21 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             txt_soluong10.setText(sl.toString());
         }
     }//GEN-LAST:event_dgv_DSSACHMouseClicked
-    
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e1) {
+            return false;
+        }
+    }  
     private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
         // TODO add your handling code here:
+        if(isNumeric(txt_soluong10.getText())==false || Integer.parseInt(txt_soluong10.getText())<0)
+        {
+            JOptionPane.showMessageDialog(null,"Vui lòng nhập đúng số lượng!");
+            return;
+        }
         if(ctch.capNhatCTCH(mach, txt_masach.getText(), Integer.parseInt(txt_soluong10.getText()))==false)
         {
             JOptionPane.showMessageDialog(null,"Cập nhật không thành công!");
@@ -449,6 +461,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
 
         }
     }//GEN-LAST:event_btn_qrActionPerformed
+      
     private void initWebcam()
     {
         Dimension size = WebcamResolution.QVGA.getSize();

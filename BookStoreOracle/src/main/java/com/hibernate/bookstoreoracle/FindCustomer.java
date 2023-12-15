@@ -436,6 +436,7 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
             lb_sdt.setVisible(true);
             btn_luu.setVisible(true);
             flag=false;
+            jLabel6.setVisible(false);
             Color col = new Color(220, 53, 53);
             btn_ThemKH.setForeground(col);
             btn_SuaKH.setForeground(Color.BLACK);
@@ -448,6 +449,7 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
             lb_sdt.setVisible(true);
             btn_luu.setVisible(true);
             flag=false;
+            jLabel6.setVisible(false);
             Color col = new Color(220, 53, 53);
             btn_ThemKH.setForeground(col);
             btn_SuaKH.setForeground(Color.BLACK);
@@ -460,6 +462,7 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
             lb_sdt.setVisible(false);
             btn_luu.setVisible(false);
             flag=true;
+            jLabel6.setVisible(true);
             Color col = new Color(220, 53, 53);
             btn_ThemKH.setForeground(Color.BLACK);
             chon="Them";
@@ -475,6 +478,7 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
             lb_sdt.setVisible(true);
             btn_luu.setVisible(true);
             flag=false;
+            jLabel6.setVisible(false);
             Color col = new Color(220, 53, 53);
             btn_SuaKH.setForeground(col);
             btn_ThemKH.setForeground(Color.BLACK);
@@ -487,6 +491,7 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
             lb_sdt.setVisible(true);
             btn_luu.setVisible(true);
             flag=false;
+            jLabel6.setVisible(false);
             Color col = new Color(220, 53, 53);
             btn_SuaKH.setForeground(col);
             btn_ThemKH.setForeground(Color.BLACK);
@@ -499,6 +504,7 @@ public class FindCustomer extends javax.swing.JInternalFrame implements Runnable
             lb_sdt.setVisible(false);
             btn_luu.setVisible(false);
             flag=true;
+            jLabel6.setVisible(true);
             Color col = new Color(220, 53, 53);
             btn_SuaKH.setForeground(Color.BLACK);
             chon="Sua";

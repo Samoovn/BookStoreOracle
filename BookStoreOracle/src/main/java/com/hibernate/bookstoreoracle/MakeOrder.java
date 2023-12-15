@@ -500,7 +500,7 @@ public class MakeOrder extends javax.swing.JInternalFrame implements Runnable,Th
         giohang.setRowCount(0);
         dgv_giohang.setModel(giohang);
     }//GEN-LAST:event_btn_resetgiohangActionPerformed
-
+    
     private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
         // TODO add your handling code here:
         ArrayList<Sach> GioHang = new ArrayList<Sach>();

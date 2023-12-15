@@ -17,7 +17,8 @@ public class SessionBLL {
     public static ArrayList<SessionClass> xuatSession(){
         ArrayList<SessionClass> ds = new ArrayList<SessionClass>();
         OracleProvider op = new OracleProvider();
-        String sql= "SELECT SID, SCHEMANAME, MACHINE, PROCESS, PROGRAM, SQL_EXEC_START, LOGON_TIME, EVENT, SERVICE_NAME FROM V$SESSION WHERE TYPE!='BACKGROUND'";
+        String sql= "SELECT SID, SCHEMANAME, MACHINE, PROCESS, PROGRAM, SQL_EXEC_START, "
+                + "LOGON_TIME, EVENT, SERVICE_NAME FROM V$SESSION WHERE TYPE!='BACKGROUND'";
         try{
             PreparedStatement cs = op.getConnection().prepareStatement(sql);
             ResultSet rs = cs.executeQuery();
