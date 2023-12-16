@@ -15,20 +15,8 @@ public class Backup extends javax.swing.JInternalFrame {
     /**
      * Creates new form Backup
      */
-    private String mach;
-    private String tench;
     public Backup(String mach) {
         initComponents();
-        this.mach = mach;
-        if(mach.equals("CH01"))
-        {
-            tench = "CUAHANGSACH1";
-            
-        }else if(mach.equals("CH02"))
-        {
-            tench = "CUAHANGSACH2";
-            
-        }
     }
 
     /**
@@ -86,12 +74,12 @@ public class Backup extends javax.swing.JInternalFrame {
     BackupDAO backup = new BackupDAO();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       backup.backup(tench);
+       backup.backup();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        backup.restore(tench);
+        backup.restore();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
