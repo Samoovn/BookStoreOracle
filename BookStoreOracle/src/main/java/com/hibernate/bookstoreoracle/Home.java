@@ -42,6 +42,10 @@ public class Home extends javax.swing.JFrame {
             jMenu10.setVisible(false);
             jMenu11.setVisible(false);
         }
+        if(!mach.equals("CH01")||!mach.equals("CH02"))
+        {
+            jMenu9.setVisible(false);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

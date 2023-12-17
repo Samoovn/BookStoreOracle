@@ -454,6 +454,7 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
             FileOutputStream export_img = new FileOutputStream(new File(path_name+(f_name +".png")));
             export_img.write(out.toByteArray());
             export_img.flush(); 
+            JOptionPane.showMessageDialog(null,"Tạo mã qr thành công!");
         }catch(Exception e)
         {
             System.out.println("Lỗi");

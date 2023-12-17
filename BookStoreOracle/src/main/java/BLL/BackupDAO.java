@@ -15,7 +15,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class BackupDAO {
     public static void backup(){
-        String command = "expdp system/system123@CUAHANGSACH1 schemas=system directory=EXPDP_FULL dumpfile=CH01_export.dmp logfile=export.log REUSE_DUMPFILES=YES";
+        String command = "expdp system/system123@CUAHANGSACH1 schemas=system directory=EXPDP_FULL "
+                + "dumpfile=CH01_export.dmp logfile=export.log REUSE_DUMPFILES=YES";
         try{
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
             processBuilder.redirectErrorStream(true);
@@ -25,7 +26,8 @@ public class BackupDAO {
         catch(Exception e){ 
              System.out.print(e);
         }
-         String command3 = "expdp system/system123@CUAHANGSACH2 schemas=system directory=EXPDP_FULL dumpfile=CH02_export.dmp logfile=export.log REUSE_DUMPFILES=YES";
+         String command3 = "expdp system/system123@CUAHANGSACH2 schemas=system directory=EXPDP_FULL "
+                 + "dumpfile=CH02_export.dmp logfile=export.log REUSE_DUMPFILES=YES";
         try{
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command3);
             processBuilder.redirectErrorStream(true);
@@ -35,7 +37,8 @@ public class BackupDAO {
         catch(Exception e){ 
              System.out.print(e);
         }
-        String command2 = "expdp system/system123@CUAHANGSACH schemas=system directory=EXPDP_FULL dumpfile=SERVER_export.dmp logfile=export.log REUSE_DUMPFILES=YES";
+        String command2 = "expdp system/system123@CUAHANGSACH schemas=system directory=EXPDP_FULL "
+                + "dumpfile=SERVER_export.dmp logfile=export.log REUSE_DUMPFILES=YES";
         try{
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command2);
             processBuilder.redirectErrorStream(true);
@@ -47,7 +50,8 @@ public class BackupDAO {
         }
     }
     public static void restore(){
-        String command = "impdp system/system123@CUAHANGSACH1 directory=EXPDP_FULL dumpfile=CH01_export.dmp logfile=import.log TABLE_EXISTS_ACTION=REPLACE";
+        String command = "impdp system/system123@CUAHANGSACH1 directory=EXPDP_FULL "
+                + "dumpfile=CH01_export.dmp logfile=import.log TABLE_EXISTS_ACTION=REPLACE";
         try{
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command);
             processBuilder.redirectErrorStream(true);
@@ -57,7 +61,8 @@ public class BackupDAO {
         catch(Exception e){ 
              System.out.print(e);
         }
-        String command3 = "impdp system/system123@CUAHANGSACH2 directory=EXPDP_FULL dumpfile=CH02_export.dmp logfile=import.log TABLE_EXISTS_ACTION=REPLACE";
+        String command3 = "impdp system/system123@CUAHANGSACH2 directory=EXPDP_FULL "
+                + "dumpfile=CH02_export.dmp logfile=import.log TABLE_EXISTS_ACTION=REPLACE";
         try{
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command3);
             processBuilder.redirectErrorStream(true);
@@ -67,7 +72,8 @@ public class BackupDAO {
         catch(Exception e){ 
              System.out.print(e);
         }
-        String command2 = "impdp system/system123@CUAHANGSACH directory=EXPDP_FULL dumpfile=SERVER_export.dmp logfile=import.log TABLE_EXISTS_ACTION=REPLACE";
+        String command2 = "impdp system/system123@CUAHANGSACH directory=EXPDP_FULL "
+                + "dumpfile=SERVER_export.dmp logfile=import.log TABLE_EXISTS_ACTION=REPLACE";
         try{
             ProcessBuilder processBuilder = new ProcessBuilder("cmd", "/c", command2);
             processBuilder.redirectErrorStream(true);

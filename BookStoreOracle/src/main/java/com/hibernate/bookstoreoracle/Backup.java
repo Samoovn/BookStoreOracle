@@ -17,6 +17,7 @@ public class Backup extends javax.swing.JInternalFrame {
      */
     public Backup(String mach) {
         initComponents();
+        
     }
 
     /**
