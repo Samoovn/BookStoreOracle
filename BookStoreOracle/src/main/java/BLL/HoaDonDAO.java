@@ -28,16 +28,16 @@ public class HoaDonDAO {
             CallableStatement cs = op.getConnection().prepareCall(sql);
             cs.registerOutParameter(1, OracleTypes.CURSOR);
             cs.setString(2, mahd);
-             cs.setString(3, makh);
+            cs.setString(3, makh);
             cs.execute();
             ResultSet rs = ((OracleCallableStatement)cs).getCursor(1);
             while(rs.next()){
                 HoaDon kh = new HoaDon();
+                kh.setMacuahang(rs.getString("MACH"));
                 kh.setMahd(rs.getString("MAHD"));
                 kh.setMakh(rs.getString("MAKH"));
                 kh.setNgaylap(rs.getString("NGAYLAP"));
                 kh.setTongtien(Integer.parseInt(rs.getString("TONGTIEN")));
-                kh.setMacuahang(rs.getString("MACH"));
                 dshd.add(kh);
             }
             rs.close();
@@ -138,16 +138,21 @@ public class HoaDonDAO {
     }
      public static boolean deleteHoaDon(String mahd){
          OracleProvider op = new OracleProvider();
-         String sql= "{CALL SYSTEM.P_XOA_HOA_DON(?)}";
-         try {
-             CallableStatement cs = op.getConnection().prepareCall(sql);
-             cs.setString(1, mahd);
-             cs.executeUpdate();
-             cs.close();
-             return true;
-         } catch (Exception e) {
-             System.out.println(e);
-             return false;
+         if(timThongTinHoaDon(mahd,null).size() == 0){
+            return false;         
+         }
+         else{
+             String sql= "{CALL SYSTEM.P_XOA_HOA_DON(?)}";
+            try {
+                CallableStatement cs = op.getConnection().prepareCall(sql);
+                cs.setString(1, mahd);
+                cs.executeUpdate();
+                cs.close();
+                return true;
+            } catch (Exception e) {
+                System.out.println(e);
+                return false;
+            }
          }
      }
 }

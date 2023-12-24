@@ -197,10 +197,10 @@ public class Login extends javax.swing.JFrame {
         }
         else if(cb_tencuahang.getSelectedItem() == null || cb_tencuahang.getSelectedItem().equals("CUAHANGSACH2"))
         {
-            op.setIp("171.235.167.112");
+            op.setIp("171.235.176.58");
             op.setPort("1521");
             op.setService("CUAHANGSACH2");
-            op.setUrl("jdbc:oracle:thin:@171.235.167.112:1521:CUAHANGSACH2");
+            op.setUrl("jdbc:oracle:thin:@171.235.176.58:1521:CUAHANGSACH2");
              mach = "CH02";
         }
 //        else if(cb_tencuahang.getSelectedItem().equals("CUAHANGSACH3"))

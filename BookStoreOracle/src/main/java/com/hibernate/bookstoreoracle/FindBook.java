@@ -315,6 +315,11 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
                 btn_Scan1MouseClicked(evt);
             }
         });
+        btn_Scan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Scan1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -462,6 +467,10 @@ public class FindBook extends javax.swing.JInternalFrame implements Runnable,Thr
 
         }
     }//GEN-LAST:event_btn_qrActionPerformed
+
+    private void btn_Scan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Scan1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_Scan1ActionPerformed
       
     private void initWebcam()
     {

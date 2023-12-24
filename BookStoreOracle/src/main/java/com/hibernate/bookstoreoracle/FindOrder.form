@@ -111,7 +111,7 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="txt_makh" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbzz" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -121,7 +121,7 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="txt_mahd" pref="227" max="32767" attributes="0"/>
-                                      <Component id="jTextField1" max="32767" attributes="0"/>
+                                      <Component id="txt_makh" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                                   <Component id="btn_TimHoaDon" min="-2" max="-2" attributes="0"/>
@@ -146,8 +146,8 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="txt_makh" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_makh" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="lbzz" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -179,7 +179,7 @@
             <Property name="text" type="java.lang.String" value="Ng&#xe0;y l&#x1ead;p :"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txt_makh">
           <Properties>
             <Property name="name" type="java.lang.String" value="txt_NgayLap" noResource="true"/>
           </Properties>
@@ -194,7 +194,7 @@
             <Property name="name" type="java.lang.String" value="txt_NgayLap" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="txt_makh">
+        <Component class="javax.swing.JLabel" name="lbzz">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ma&#x303; kh&#xe1;ch h&#xe0;ng:"/>
           </Properties>

@@ -50,10 +50,10 @@ public class FindOrder extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_makh = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txt_TongTien = new javax.swing.JTextField();
-        txt_makh = new javax.swing.JLabel();
+        lbzz = new javax.swing.JLabel();
         btn_TimHoaDon = new javax.swing.JButton();
         txt_mahd = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -77,13 +77,13 @@ public class FindOrder extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Ngày lập :");
 
-        jTextField1.setName("txt_NgayLap"); // NOI18N
+        txt_makh.setName("txt_NgayLap"); // NOI18N
 
         jLabel3.setText("Tổng tiền :");
 
         txt_TongTien.setName("txt_NgayLap"); // NOI18N
 
-        txt_makh.setText("Mã khách hàng:");
+        lbzz.setText("Mã khách hàng:");
 
         btn_TimHoaDon.setText("Tìm kiếm");
         btn_TimHoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -138,14 +138,14 @@ public class FindOrder extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addComponent(txt_makh)
+                                        .addComponent(lbzz)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addGap(31, 31, 31)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txt_mahd, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                                    .addComponent(jTextField1))
+                                    .addComponent(txt_makh))
                                 .addGap(9, 9, 9)
                                 .addComponent(btn_TimHoaDon)))))
                 .addContainerGap(57, Short.MAX_VALUE))
@@ -162,8 +162,8 @@ public class FindOrder extends javax.swing.JInternalFrame {
                     .addComponent(btn_TimHoaDon))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_makh))
+                    .addComponent(txt_makh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbzz))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -263,18 +263,23 @@ public class FindOrder extends javax.swing.JInternalFrame {
     private void btn_TimHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimHoaDonActionPerformed
         // TODO add your handling code here:
         ArrayList<HoaDon> dsHD = hd.timThongTinHoaDon(txt_mahd.getText(), txt_makh.getText());
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Mã Hóa Đơn");
-        model.addColumn("Mã Khách Hàng");
-        model.addColumn("Ngày Lập");
-        model.addColumn("Tổng Tiền");
-        model.addColumn("Mã Cửa Hàng");
-         for (HoaDon kh : dsHD) {
-            Object[] rowData = {kh.getMahd(), kh.getMakh(), kh.getNgaylap(), kh.getTongtien(), kh.getMacuahang()};
-            model.addRow(rowData);
+        if(dsHD.size() > 0){
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Mã Hóa Đơn");
+            model.addColumn("Mã Khách Hàng");
+            model.addColumn("Ngày Lập");
+            model.addColumn("Tổng Tiền");
+            model.addColumn("Mã Cửa Hàng");
+             for (HoaDon kh : dsHD) {
+                Object[] rowData = {kh.getMahd(), kh.getMakh(), kh.getNgaylap(), kh.getTongtien(), kh.getMacuahang()};
+                model.addRow(rowData);
+            }       
+            dgv_DSHoaDon.setModel(model);
+            loaddgv_DSSP(txt_mahd.getText());
         }
-        dgv_DSHoaDon.setModel(model);
-        loaddgv_DSSP(txt_mahd.getText());
+        else{
+            JOptionPane.showMessageDialog(null,"Hoá đơn không có trong hệ thống");
+        }
     }//GEN-LAST:event_btn_TimHoaDonActionPerformed
     private  void loaddgv_DSSP(String mahd){
         ArrayList<CTHD> dsHD = hd.hienChiTietHoaDon(mahd);
@@ -310,8 +315,11 @@ public class FindOrder extends javax.swing.JInternalFrame {
         }
         // Check the user's choice
         if (choice == JOptionPane.YES_OPTION) {
-            if(hd.deleteHoaDon(txt_mahd.getText())){
+            if(hd.deleteHoaDon(txt_mahd.getText())==true){
                 JOptionPane.showMessageDialog(null,"Xoá hoá đơn thành công");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Xoá hoá đơn thất bại");
             }
         } else {
             JOptionPane.showMessageDialog(null,"Xoá hoá đơn thất bại");
@@ -334,10 +342,10 @@ public class FindOrder extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbzz;
     private javax.swing.JTextField txt_TongTien;
     private javax.swing.JTextField txt_TongTien4;
     private javax.swing.JTextField txt_mahd;
-    private javax.swing.JLabel txt_makh;
+    private javax.swing.JTextField txt_makh;
     // End of variables declaration//GEN-END:variables
 }
